@@ -22,7 +22,6 @@
 		43D4D591193F4874004DCABB /* GLEssentialsWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D4D58E193F4874004DCABB /* GLEssentialsWindowController.m */; };
 		43D4D596193F4890004DCABB /* GLRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43D4D595193F4890004DCABB /* GLRenderer.cpp */; };
 		43D4D59D193F48DB004DCABB /* BaseShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43D4D59A193F48DB004DCABB /* BaseShader.cpp */; };
-		43D4D59E193F48DB004DCABB /* SceneColorShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43D4D59C193F48DB004DCABB /* SceneColorShader.cpp */; };
 		43D4D5A1193F48E4004DCABB /* BaseModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43D4D5A0193F48E4004DCABB /* BaseModel.cpp */; };
 		43D4D5A4193F48F1004DCABB /* ScreenQuadModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43D4D5A3193F48F1004DCABB /* ScreenQuadModel.cpp */; };
 		43D4D5AC193F4947004DCABB /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43D4D5AB193F4947004DCABB /* CoreFoundation.framework */; };
@@ -137,6 +136,10 @@
 		43D4D723193F4E14004DCABB /* vector_angle.inl in Resources */ = {isa = PBXBuildFile; fileRef = 43D4D6A3193F4E14004DCABB /* vector_angle.inl */; };
 		43D4D724193F4E14004DCABB /* vector_query.inl in Resources */ = {isa = PBXBuildFile; fileRef = 43D4D6A5193F4E14004DCABB /* vector_query.inl */; };
 		43D4D725193F4E14004DCABB /* wrap.inl in Resources */ = {isa = PBXBuildFile; fileRef = 43D4D6A7193F4E14004DCABB /* wrap.inl */; };
+		43D4D729193F6A29004DCABB /* SimpleParticleShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43D4D727193F6A29004DCABB /* SimpleParticleShader.cpp */; };
+		43D4D72B193F6D27004DCABB /* simpleParticle.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 43D4D72A193F6D27004DCABB /* simpleParticle.vsh */; };
+		43D4D72D193F6D2D004DCABB /* simpleParticle.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 43D4D72C193F6D2D004DCABB /* simpleParticle.fsh */; };
+		43D4D730193F6E4A004DCABB /* SimpleParticleModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43D4D72E193F6E4A004DCABB /* SimpleParticleModel.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -178,8 +181,6 @@
 		43D4D595193F4890004DCABB /* GLRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLRenderer.cpp; sourceTree = "<group>"; };
 		43D4D599193F48DB004DCABB /* BaseShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseShader.h; sourceTree = "<group>"; };
 		43D4D59A193F48DB004DCABB /* BaseShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseShader.cpp; sourceTree = "<group>"; };
-		43D4D59B193F48DB004DCABB /* SceneColorShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneColorShader.h; sourceTree = "<group>"; };
-		43D4D59C193F48DB004DCABB /* SceneColorShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SceneColorShader.cpp; sourceTree = "<group>"; };
 		43D4D59F193F48E4004DCABB /* BaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseModel.h; sourceTree = "<group>"; };
 		43D4D5A0193F48E4004DCABB /* BaseModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseModel.cpp; sourceTree = "<group>"; };
 		43D4D5A2193F48F1004DCABB /* ScreenQuadModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreenQuadModel.h; sourceTree = "<group>"; };
@@ -446,6 +447,12 @@
 		43D4D6B8193F4E14004DCABB /* vector_relational.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = vector_relational.hpp; sourceTree = "<group>"; };
 		43D4D6BA193F4E14004DCABB /* xstream.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = xstream.hpp; sourceTree = "<group>"; };
 		43D4D726193F4E37004DCABB /* glUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = glUtil.h; sourceTree = "<group>"; };
+		43D4D727193F6A29004DCABB /* SimpleParticleShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SimpleParticleShader.cpp; sourceTree = "<group>"; };
+		43D4D728193F6A29004DCABB /* SimpleParticleShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleParticleShader.h; sourceTree = "<group>"; };
+		43D4D72A193F6D27004DCABB /* simpleParticle.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = simpleParticle.vsh; sourceTree = "<group>"; };
+		43D4D72C193F6D2D004DCABB /* simpleParticle.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = simpleParticle.fsh; sourceTree = "<group>"; };
+		43D4D72E193F6E4A004DCABB /* SimpleParticleModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SimpleParticleModel.cpp; sourceTree = "<group>"; };
+		43D4D72F193F6E4A004DCABB /* SimpleParticleModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleParticleModel.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -588,8 +595,8 @@
 			children = (
 				43D4D599193F48DB004DCABB /* BaseShader.h */,
 				43D4D59A193F48DB004DCABB /* BaseShader.cpp */,
-				43D4D59B193F48DB004DCABB /* SceneColorShader.h */,
-				43D4D59C193F48DB004DCABB /* SceneColorShader.cpp */,
+				43D4D728193F6A29004DCABB /* SimpleParticleShader.h */,
+				43D4D727193F6A29004DCABB /* SimpleParticleShader.cpp */,
 			);
 			name = "Shader Classes";
 			sourceTree = "<group>";
@@ -601,6 +608,8 @@
 				43D4D5A3193F48F1004DCABB /* ScreenQuadModel.cpp */,
 				43D4D59F193F48E4004DCABB /* BaseModel.h */,
 				43D4D5A0193F48E4004DCABB /* BaseModel.cpp */,
+				43D4D72F193F6E4A004DCABB /* SimpleParticleModel.h */,
+				43D4D72E193F6E4A004DCABB /* SimpleParticleModel.cpp */,
 			);
 			name = "Model Classes";
 			sourceTree = "<group>";
@@ -608,6 +617,8 @@
 		43D4D5A9193F4904004DCABB /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
+				43D4D72A193F6D27004DCABB /* simpleParticle.vsh */,
+				43D4D72C193F6D2D004DCABB /* simpleParticle.fsh */,
 			);
 			name = Shaders;
 			sourceTree = "<group>";
@@ -1031,6 +1042,7 @@
 				43D4D707193F4E14004DCABB /* matrix_query.inl in Resources */,
 				43D4D6EF193F4E14004DCABB /* closest_point.inl in Resources */,
 				43D4D703193F4E14004DCABB /* matrix_cross_product.inl in Resources */,
+				43D4D72B193F6D27004DCABB /* simpleParticle.vsh in Resources */,
 				43D4D6E0193F4E14004DCABB /* constants.inl in Resources */,
 				43D4D6F6193F4E14004DCABB /* extend.inl in Resources */,
 				43D4D6ED193F4E14004DCABB /* associated_min_max.inl in Resources */,
@@ -1059,6 +1071,7 @@
 				43D4D71E193F4E14004DCABB /* string_cast.inl in Resources */,
 				43D4D702193F4E14004DCABB /* log_base.inl in Resources */,
 				43D4D704193F4E14004DCABB /* matrix_interpolation.inl in Resources */,
+				43D4D72D193F6D2D004DCABB /* simpleParticle.fsh in Resources */,
 				43D4D6F0193F4E14004DCABB /* color_space.inl in Resources */,
 				43D4D724193F4E14004DCABB /* vector_query.inl in Resources */,
 				43D4D5B8193F4C22004DCABB /* MainMenu.xib in Resources */,
@@ -1133,9 +1146,10 @@
 				43D4D59D193F48DB004DCABB /* BaseShader.cpp in Sources */,
 				43D4D596193F4890004DCABB /* GLRenderer.cpp in Sources */,
 				43D4D5A4193F48F1004DCABB /* ScreenQuadModel.cpp in Sources */,
+				43D4D729193F6A29004DCABB /* SimpleParticleShader.cpp in Sources */,
+				43D4D730193F6E4A004DCABB /* SimpleParticleModel.cpp in Sources */,
 				43D4CF68193F45C9004DCABB /* AppDelegate.m in Sources */,
 				43D4D591193F4874004DCABB /* GLEssentialsWindowController.m in Sources */,
-				43D4D59E193F48DB004DCABB /* SceneColorShader.cpp in Sources */,
 				43D4CF61193F45C9004DCABB /* main.m in Sources */,
 				43D4D5B5193F4B35004DCABB /* LeapObjectiveC.mm in Sources */,
 				43D4D6C6193F4E14004DCABB /* glm.cpp in Sources */,
