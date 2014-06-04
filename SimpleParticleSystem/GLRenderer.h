@@ -11,6 +11,9 @@
 #include "glm/gtc/type_ptr.hpp"
 #include "glUtil.h"
 
+class SimpleParticleModel;
+class SimpleParticleShader;
+
 class GLRenderer {
 public:
     void initOpenGL();
@@ -31,4 +34,7 @@ private:
     
     int mViewWidth;
     int mViewHeight;
+    
+    SimpleParticleModel *mSimpleParticleModel;
+    SimpleParticleShader *mSimpleParticleShader;
 };

@@ -10,7 +10,7 @@
 
 #define PARTICLE_COUNT 300 // tweak me to see if we need more/less particles
 
-SimpleParticleModel::SimpleParticleModel() : BaseModel() {
+SimpleParticleModel::SimpleParticleModel() : BaseDrawableObject() {
     float vv[PARTICLE_COUNT * 3]; // start velocities vec3
     float vt[PARTICLE_COUNT]; // start times
     float t_accum = 0.0f; // start time
@@ -27,4 +27,26 @@ SimpleParticleModel::SimpleParticleModel() : BaseModel() {
         vv[j + 2] = randz; // z
         j+= 3;
     }
+    
+    GLuint velocity_vbo;
+    glGenBuffers (1, &velocity_vbo);
+    glBindBuffer (GL_ARRAY_BUFFER, velocity_vbo);
+    glBufferData (GL_ARRAY_BUFFER, sizeof (vv), vv, GL_STATIC_DRAW);
+    
+    GLuint time_vbo;
+    glGenBuffers (1, &time_vbo);
+    glBindBuffer (GL_ARRAY_BUFFER, time_vbo);
+    glBufferData (GL_ARRAY_BUFFER, sizeof (vt), vt, GL_STATIC_DRAW);
+    
+    glGenVertexArrays (1, &mVAO);
+    glBindVertexArray (mVAO);
+    glBindBuffer (GL_ARRAY_BUFFER, velocity_vbo);
+    glVertexAttribPointer (0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+    glBindBuffer (GL_ARRAY_BUFFER, time_vbo);
+    glVertexAttribPointer (1, 1, GL_FLOAT, GL_FALSE, 0, NULL);
+    glEnableVertexAttribArray (0);
+    glEnableVertexAttribArray (1);
+    
+    mNumVertices = PARTICLE_COUNT;
+    mPrimitiveType = GL_POINTS;
 }

@@ -26,11 +26,9 @@
 		43D4D5A4193F48F1004DCABB /* ScreenQuadModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43D4D5A3193F48F1004DCABB /* ScreenQuadModel.cpp */; };
 		43D4D5AC193F4947004DCABB /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43D4D5AB193F4947004DCABB /* CoreFoundation.framework */; };
 		43D4D5AE193F494D004DCABB /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43D4D5AD193F494D004DCABB /* OpenGL.framework */; };
-		43D4D5B0193F4B1B004DCABB /* libLeap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 43D4D5AF193F4B1B004DCABB /* libLeap.dylib */; };
 		43D4D5B5193F4B35004DCABB /* LeapObjectiveC.mm in Sources */ = {isa = PBXBuildFile; fileRef = 43D4D5B4193F4B35004DCABB /* LeapObjectiveC.mm */; };
 		43D4D5B8193F4C22004DCABB /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43D4D5B7193F4C22004DCABB /* MainMenu.xib */; };
 		43D4D6BB193F4E14004DCABB /* CMakeLists.txt in Resources */ = {isa = PBXBuildFile; fileRef = 43D4D5BA193F4E14004DCABB /* CMakeLists.txt */; };
-		43D4D6BC193F4E14004DCABB /* dummy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43D4D5C4193F4E14004DCABB /* dummy.cpp */; };
 		43D4D6BD193F4E14004DCABB /* func_common.inl in Resources */ = {isa = PBXBuildFile; fileRef = 43D4D5C6193F4E14004DCABB /* func_common.inl */; };
 		43D4D6BE193F4E14004DCABB /* func_exponential.inl in Resources */ = {isa = PBXBuildFile; fileRef = 43D4D5C8193F4E14004DCABB /* func_exponential.inl */; };
 		43D4D6BF193F4E14004DCABB /* func_geometric.inl in Resources */ = {isa = PBXBuildFile; fileRef = 43D4D5CA193F4E14004DCABB /* func_geometric.inl */; };
@@ -140,6 +138,9 @@
 		43D4D72B193F6D27004DCABB /* simpleParticle.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 43D4D72A193F6D27004DCABB /* simpleParticle.vsh */; };
 		43D4D72D193F6D2D004DCABB /* simpleParticle.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 43D4D72C193F6D2D004DCABB /* simpleParticle.fsh */; };
 		43D4D730193F6E4A004DCABB /* SimpleParticleModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43D4D72E193F6E4A004DCABB /* SimpleParticleModel.cpp */; };
+		43D4D733193F73D0004DCABB /* BaseDrawableObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43D4D731193F73D0004DCABB /* BaseDrawableObject.cpp */; };
+		43D4D737193F7ADE004DCABB /* libLeap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 43D4D736193F7ADE004DCABB /* libLeap.dylib */; };
+		43D4D738193F7B12004DCABB /* libLeap.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 43D4D736193F7ADE004DCABB /* libLeap.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -151,6 +152,19 @@
 			remoteInfo = SimpleParticleSystem;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		43D4D734193F7979004DCABB /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 6;
+			files = (
+				43D4D738193F7B12004DCABB /* libLeap.dylib in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		43D4CF51193F45C9004DCABB /* SimpleParticleSystem.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleParticleSystem.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -187,7 +201,6 @@
 		43D4D5A3193F48F1004DCABB /* ScreenQuadModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ScreenQuadModel.cpp; sourceTree = "<group>"; };
 		43D4D5AB193F4947004DCABB /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		43D4D5AD193F494D004DCABB /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
-		43D4D5AF193F4B1B004DCABB /* libLeap.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libLeap.dylib; sourceTree = "<group>"; };
 		43D4D5B1193F4B35004DCABB /* Leap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Leap.h; sourceTree = "<group>"; };
 		43D4D5B2193F4B35004DCABB /* LeapMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeapMath.h; sourceTree = "<group>"; };
 		43D4D5B3193F4B35004DCABB /* LeapObjectiveC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeapObjectiveC.h; sourceTree = "<group>"; };
@@ -453,6 +466,9 @@
 		43D4D72C193F6D2D004DCABB /* simpleParticle.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = simpleParticle.fsh; sourceTree = "<group>"; };
 		43D4D72E193F6E4A004DCABB /* SimpleParticleModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SimpleParticleModel.cpp; sourceTree = "<group>"; };
 		43D4D72F193F6E4A004DCABB /* SimpleParticleModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleParticleModel.h; sourceTree = "<group>"; };
+		43D4D731193F73D0004DCABB /* BaseDrawableObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseDrawableObject.cpp; sourceTree = "<group>"; };
+		43D4D732193F73D0004DCABB /* BaseDrawableObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseDrawableObject.h; sourceTree = "<group>"; };
+		43D4D736193F7ADE004DCABB /* libLeap.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libLeap.dylib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -460,7 +476,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				43D4D5B0193F4B1B004DCABB /* libLeap.dylib in Frameworks */,
+				43D4D737193F7ADE004DCABB /* libLeap.dylib in Frameworks */,
 				43D4D5AE193F494D004DCABB /* OpenGL.framework in Frameworks */,
 				43D4D5AC193F4947004DCABB /* CoreFoundation.framework in Frameworks */,
 				43D4CF55193F45C9004DCABB /* Cocoa.framework in Frameworks */,
@@ -501,7 +517,7 @@
 		43D4CF53193F45C9004DCABB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				43D4D5AF193F4B1B004DCABB /* libLeap.dylib */,
+				43D4D736193F7ADE004DCABB /* libLeap.dylib */,
 				43D4D5AD193F494D004DCABB /* OpenGL.framework */,
 				43D4D5AB193F4947004DCABB /* CoreFoundation.framework */,
 				43D4CF54193F45C9004DCABB /* Cocoa.framework */,
@@ -608,6 +624,8 @@
 				43D4D5A3193F48F1004DCABB /* ScreenQuadModel.cpp */,
 				43D4D59F193F48E4004DCABB /* BaseModel.h */,
 				43D4D5A0193F48E4004DCABB /* BaseModel.cpp */,
+				43D4D732193F73D0004DCABB /* BaseDrawableObject.h */,
+				43D4D731193F73D0004DCABB /* BaseDrawableObject.cpp */,
 				43D4D72F193F6E4A004DCABB /* SimpleParticleModel.h */,
 				43D4D72E193F6E4A004DCABB /* SimpleParticleModel.cpp */,
 			);
@@ -947,6 +965,7 @@
 				43D4CF4D193F45C9004DCABB /* Sources */,
 				43D4CF4E193F45C9004DCABB /* Frameworks */,
 				43D4CF4F193F45C9004DCABB /* Resources */,
+				43D4D734193F7979004DCABB /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -1150,11 +1169,11 @@
 				43D4D730193F6E4A004DCABB /* SimpleParticleModel.cpp in Sources */,
 				43D4CF68193F45C9004DCABB /* AppDelegate.m in Sources */,
 				43D4D591193F4874004DCABB /* GLEssentialsWindowController.m in Sources */,
+				43D4D733193F73D0004DCABB /* BaseDrawableObject.cpp in Sources */,
 				43D4CF61193F45C9004DCABB /* main.m in Sources */,
 				43D4D5B5193F4B35004DCABB /* LeapObjectiveC.mm in Sources */,
 				43D4D6C6193F4E14004DCABB /* glm.cpp in Sources */,
 				43D4D590193F4874004DCABB /* GLEssentialsFullscreenWindow.m in Sources */,
-				43D4D6BC193F4E14004DCABB /* dummy.cpp in Sources */,
 				43D4D58F193F4874004DCABB /* GLEssentialsGLView.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1277,6 +1296,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SimpleParticleSystem/SimpleParticleSystem-Prefix.pch";
@@ -1300,6 +1320,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SimpleParticleSystem/SimpleParticleSystem-Prefix.pch";

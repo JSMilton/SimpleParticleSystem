@@ -7,6 +7,8 @@
 //
 
 #include "GLRenderer.h"
+#include "SimpleParticleModel.h"
+#include "SimpleParticleShader.h"
 
 void GLRenderer::initOpenGL() {
     glEnable(GL_DEPTH_TEST);
@@ -14,6 +16,9 @@ void GLRenderer::initOpenGL() {
     mViewWidth = 1200;
     mViewHeight = 800;
     reshape(1200, 800);
+    
+    mSimpleParticleModel = new SimpleParticleModel;
+    mSimpleParticleShader = new SimpleParticleShader;
     
     render(0.0);
 }
@@ -24,6 +29,25 @@ void GLRenderer::render(float dt) {
         dt = FPS_CLAMP;
     
     freeGLBindings();
+    
+    /* Render Particles. Enabling point re-sizing in vertex shader */
+    glEnable (GL_PROGRAM_POINT_SIZE);
+    glEnable (GL_BLEND);
+    glClearColor(0, 0, 0, 1);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    mSimpleParticleShader->enable();
+    
+    /* update time in shaders */
+    glUniform3f(mSimpleParticleShader->mEmitterPositionHandle, 1, 1, 0);
+    glUniform1f (mSimpleParticleShader->mElapsedTimeHandle, (GLfloat)dt);
+    glUniformMatrix4fv(mSimpleParticleShader->mProjectionMatrixHandle, 1, GL_FALSE, glm::value_ptr(mProjectionMatrix));
+    glUniformMatrix4fv(mSimpleParticleShader->mViewMatrixHandle, 1, GL_FALSE, glm::value_ptr(mViewMatrix));
+    
+    // draw points 0-3 from the currently bound VAO with current in-use shader
+    mSimpleParticleModel->drawArrays();
+    mSimpleParticleShader->disable();
+    glDisable (GL_BLEND);
+    glDisable (GL_PROGRAM_POINT_SIZE);
     
     mPreviousViewMatrix = mViewMatrix;
 }

@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 James Milton. All rights reserved.
 //
 
-#include "BaseModel.h"
+#include "BaseDrawableObject.h"
 
-class SimpleParticleModel : public BaseModel {
+class SimpleParticleModel : public BaseDrawableObject {
 public:
     SimpleParticleModel();
 };
