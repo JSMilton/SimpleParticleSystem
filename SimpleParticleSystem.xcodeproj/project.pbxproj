@@ -1,0 +1,479 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		43D4CF55193F45C9004DCABB /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43D4CF54193F45C9004DCABB /* Cocoa.framework */; };
+		43D4CF5F193F45C9004DCABB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43D4CF5D193F45C9004DCABB /* InfoPlist.strings */; };
+		43D4CF61193F45C9004DCABB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D4CF60193F45C9004DCABB /* main.m */; };
+		43D4CF65193F45C9004DCABB /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 43D4CF63193F45C9004DCABB /* Credits.rtf */; };
+		43D4CF68193F45C9004DCABB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D4CF67193F45C9004DCABB /* AppDelegate.m */; };
+		43D4CF6B193F45C9004DCABB /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43D4CF69193F45C9004DCABB /* MainMenu.xib */; };
+		43D4CF6D193F45C9004DCABB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 43D4CF6C193F45C9004DCABB /* Images.xcassets */; };
+		43D4CF74193F45C9004DCABB /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43D4CF73193F45C9004DCABB /* XCTest.framework */; };
+		43D4CF75193F45C9004DCABB /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43D4CF54193F45C9004DCABB /* Cocoa.framework */; };
+		43D4CF7D193F45C9004DCABB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43D4CF7B193F45C9004DCABB /* InfoPlist.strings */; };
+		43D4CF7F193F45C9004DCABB /* SimpleParticleSystemTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D4CF7E193F45C9004DCABB /* SimpleParticleSystemTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		43D4CF76193F45C9004DCABB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 43D4CF49193F45C9004DCABB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 43D4CF50193F45C9004DCABB;
+			remoteInfo = SimpleParticleSystem;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		43D4CF51193F45C9004DCABB /* SimpleParticleSystem.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleParticleSystem.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		43D4CF54193F45C9004DCABB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		43D4CF57193F45C9004DCABB /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		43D4CF58193F45C9004DCABB /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		43D4CF59193F45C9004DCABB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		43D4CF5C193F45C9004DCABB /* SimpleParticleSystem-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SimpleParticleSystem-Info.plist"; sourceTree = "<group>"; };
+		43D4CF5E193F45C9004DCABB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		43D4CF60193F45C9004DCABB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		43D4CF62193F45C9004DCABB /* SimpleParticleSystem-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SimpleParticleSystem-Prefix.pch"; sourceTree = "<group>"; };
+		43D4CF64193F45C9004DCABB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		43D4CF66193F45C9004DCABB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		43D4CF67193F45C9004DCABB /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		43D4CF6A193F45C9004DCABB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		43D4CF6C193F45C9004DCABB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		43D4CF72193F45C9004DCABB /* SimpleParticleSystemTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SimpleParticleSystemTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		43D4CF73193F45C9004DCABB /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		43D4CF7A193F45C9004DCABB /* SimpleParticleSystemTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SimpleParticleSystemTests-Info.plist"; sourceTree = "<group>"; };
+		43D4CF7C193F45C9004DCABB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		43D4CF7E193F45C9004DCABB /* SimpleParticleSystemTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SimpleParticleSystemTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		43D4CF4E193F45C9004DCABB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				43D4CF55193F45C9004DCABB /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		43D4CF6F193F45C9004DCABB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				43D4CF75193F45C9004DCABB /* Cocoa.framework in Frameworks */,
+				43D4CF74193F45C9004DCABB /* XCTest.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		43D4CF48193F45C9004DCABB = {
+			isa = PBXGroup;
+			children = (
+				43D4CF5A193F45C9004DCABB /* SimpleParticleSystem */,
+				43D4CF78193F45C9004DCABB /* SimpleParticleSystemTests */,
+				43D4CF53193F45C9004DCABB /* Frameworks */,
+				43D4CF52193F45C9004DCABB /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		43D4CF52193F45C9004DCABB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				43D4CF51193F45C9004DCABB /* SimpleParticleSystem.app */,
+				43D4CF72193F45C9004DCABB /* SimpleParticleSystemTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		43D4CF53193F45C9004DCABB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				43D4CF54193F45C9004DCABB /* Cocoa.framework */,
+				43D4CF73193F45C9004DCABB /* XCTest.framework */,
+				43D4CF56193F45C9004DCABB /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		43D4CF56193F45C9004DCABB /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				43D4CF57193F45C9004DCABB /* AppKit.framework */,
+				43D4CF58193F45C9004DCABB /* CoreData.framework */,
+				43D4CF59193F45C9004DCABB /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		43D4CF5A193F45C9004DCABB /* SimpleParticleSystem */ = {
+			isa = PBXGroup;
+			children = (
+				43D4CF66193F45C9004DCABB /* AppDelegate.h */,
+				43D4CF67193F45C9004DCABB /* AppDelegate.m */,
+				43D4CF69193F45C9004DCABB /* MainMenu.xib */,
+				43D4CF6C193F45C9004DCABB /* Images.xcassets */,
+				43D4CF5B193F45C9004DCABB /* Supporting Files */,
+			);
+			path = SimpleParticleSystem;
+			sourceTree = "<group>";
+		};
+		43D4CF5B193F45C9004DCABB /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				43D4CF5C193F45C9004DCABB /* SimpleParticleSystem-Info.plist */,
+				43D4CF5D193F45C9004DCABB /* InfoPlist.strings */,
+				43D4CF60193F45C9004DCABB /* main.m */,
+				43D4CF62193F45C9004DCABB /* SimpleParticleSystem-Prefix.pch */,
+				43D4CF63193F45C9004DCABB /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		43D4CF78193F45C9004DCABB /* SimpleParticleSystemTests */ = {
+			isa = PBXGroup;
+			children = (
+				43D4CF7E193F45C9004DCABB /* SimpleParticleSystemTests.m */,
+				43D4CF79193F45C9004DCABB /* Supporting Files */,
+			);
+			path = SimpleParticleSystemTests;
+			sourceTree = "<group>";
+		};
+		43D4CF79193F45C9004DCABB /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				43D4CF7A193F45C9004DCABB /* SimpleParticleSystemTests-Info.plist */,
+				43D4CF7B193F45C9004DCABB /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		43D4CF50193F45C9004DCABB /* SimpleParticleSystem */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 43D4CF82193F45C9004DCABB /* Build configuration list for PBXNativeTarget "SimpleParticleSystem" */;
+			buildPhases = (
+				43D4CF4D193F45C9004DCABB /* Sources */,
+				43D4CF4E193F45C9004DCABB /* Frameworks */,
+				43D4CF4F193F45C9004DCABB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SimpleParticleSystem;
+			productName = SimpleParticleSystem;
+			productReference = 43D4CF51193F45C9004DCABB /* SimpleParticleSystem.app */;
+			productType = "com.apple.product-type.application";
+		};
+		43D4CF71193F45C9004DCABB /* SimpleParticleSystemTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 43D4CF85193F45C9004DCABB /* Build configuration list for PBXNativeTarget "SimpleParticleSystemTests" */;
+			buildPhases = (
+				43D4CF6E193F45C9004DCABB /* Sources */,
+				43D4CF6F193F45C9004DCABB /* Frameworks */,
+				43D4CF70193F45C9004DCABB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				43D4CF77193F45C9004DCABB /* PBXTargetDependency */,
+			);
+			name = SimpleParticleSystemTests;
+			productName = SimpleParticleSystemTests;
+			productReference = 43D4CF72193F45C9004DCABB /* SimpleParticleSystemTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		43D4CF49193F45C9004DCABB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "James Milton";
+				TargetAttributes = {
+					43D4CF71193F45C9004DCABB = {
+						TestTargetID = 43D4CF50193F45C9004DCABB;
+					};
+				};
+			};
+			buildConfigurationList = 43D4CF4C193F45C9004DCABB /* Build configuration list for PBXProject "SimpleParticleSystem" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 43D4CF48193F45C9004DCABB;
+			productRefGroup = 43D4CF52193F45C9004DCABB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				43D4CF50193F45C9004DCABB /* SimpleParticleSystem */,
+				43D4CF71193F45C9004DCABB /* SimpleParticleSystemTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		43D4CF4F193F45C9004DCABB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				43D4CF5F193F45C9004DCABB /* InfoPlist.strings in Resources */,
+				43D4CF6D193F45C9004DCABB /* Images.xcassets in Resources */,
+				43D4CF65193F45C9004DCABB /* Credits.rtf in Resources */,
+				43D4CF6B193F45C9004DCABB /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		43D4CF70193F45C9004DCABB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				43D4CF7D193F45C9004DCABB /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		43D4CF4D193F45C9004DCABB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				43D4CF68193F45C9004DCABB /* AppDelegate.m in Sources */,
+				43D4CF61193F45C9004DCABB /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		43D4CF6E193F45C9004DCABB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				43D4CF7F193F45C9004DCABB /* SimpleParticleSystemTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		43D4CF77193F45C9004DCABB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 43D4CF50193F45C9004DCABB /* SimpleParticleSystem */;
+			targetProxy = 43D4CF76193F45C9004DCABB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		43D4CF5D193F45C9004DCABB /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				43D4CF5E193F45C9004DCABB /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		43D4CF63193F45C9004DCABB /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				43D4CF64193F45C9004DCABB /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		43D4CF69193F45C9004DCABB /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				43D4CF6A193F45C9004DCABB /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		43D4CF7B193F45C9004DCABB /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				43D4CF7C193F45C9004DCABB /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		43D4CF80193F45C9004DCABB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		43D4CF81193F45C9004DCABB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		43D4CF83193F45C9004DCABB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SimpleParticleSystem/SimpleParticleSystem-Prefix.pch";
+				INFOPLIST_FILE = "SimpleParticleSystem/SimpleParticleSystem-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		43D4CF84193F45C9004DCABB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SimpleParticleSystem/SimpleParticleSystem-Prefix.pch";
+				INFOPLIST_FILE = "SimpleParticleSystem/SimpleParticleSystem-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		43D4CF86193F45C9004DCABB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SimpleParticleSystem.app/Contents/MacOS/SimpleParticleSystem";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SimpleParticleSystem/SimpleParticleSystem-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "SimpleParticleSystemTests/SimpleParticleSystemTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		43D4CF87193F45C9004DCABB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SimpleParticleSystem.app/Contents/MacOS/SimpleParticleSystem";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SimpleParticleSystem/SimpleParticleSystem-Prefix.pch";
+				INFOPLIST_FILE = "SimpleParticleSystemTests/SimpleParticleSystemTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		43D4CF4C193F45C9004DCABB /* Build configuration list for PBXProject "SimpleParticleSystem" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				43D4CF80193F45C9004DCABB /* Debug */,
+				43D4CF81193F45C9004DCABB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		43D4CF82193F45C9004DCABB /* Build configuration list for PBXNativeTarget "SimpleParticleSystem" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				43D4CF83193F45C9004DCABB /* Debug */,
+				43D4CF84193F45C9004DCABB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		43D4CF85193F45C9004DCABB /* Build configuration list for PBXNativeTarget "SimpleParticleSystemTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				43D4CF86193F45C9004DCABB /* Debug */,
+				43D4CF87193F45C9004DCABB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 43D4CF49193F45C9004DCABB /* Project object */;
+}
