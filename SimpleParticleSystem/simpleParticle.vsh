@@ -8,6 +8,8 @@ uniform float uElapsedTime; // system time in seconds
 
 // the fragment shader can use this for it's output colour's alpha component
 out float opacity;
+out vec3 vPosition_eye;
+out mat4 vViewMatrix;
 
 void main() {
     // work out the elapsed time for _this particle_ after its start time
@@ -23,8 +25,10 @@ void main() {
     // acceleration (gravity)
     p += vI * t + 0.5 * a * t * t;
     // gradually make particle fade to invisible over 3 seconds
-    opacity = 1.0 - ((t*0.65) / 3.0);
+    opacity = 1.0 - ((t) / 3.0);
     
+    vPosition_eye = vec3(uViewMatrix * vec4 (p, 1.0)).xyz;
+    vViewMatrix = uViewMatrix;
     gl_Position = uProjectionMatrix * uViewMatrix * vec4 (p, 1.0);
-    gl_PointSize = 5.0; // size in pixels
+    gl_PointSize = 35.0; // size in pixels
 }

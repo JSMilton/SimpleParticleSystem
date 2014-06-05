@@ -15,4 +15,6 @@ public:
     GLint mProjectionMatrixHandle;
     GLint mEmitterPositionHandle;
     GLint mElapsedTimeHandle;
+    GLint mLightPositionWorldHandle;
+    GLint mTextureHandle;
 };

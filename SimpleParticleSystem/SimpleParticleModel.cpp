@@ -8,7 +8,7 @@
 
 #include "SimpleParticleModel.h"
 
-#define PARTICLE_COUNT 1000 // tweak me to see if we need more/less particles
+#define PARTICLE_COUNT 10000 // tweak me to see if we need more/less particles
 
 SimpleParticleModel::SimpleParticleModel() : BaseDrawableObject() {
     float vv[PARTICLE_COUNT * 3]; // start velocities vec3

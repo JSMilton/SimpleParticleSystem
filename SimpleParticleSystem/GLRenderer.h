@@ -20,8 +20,10 @@ public:
     void render(float dt);
     void reshape(int width, int height);
     void destroy();
+    void leap_velocity(float x, float y, float z);
     void leap_rightHandVelocity(float x, float y, float z);
     void leap_leftHandVelocity(float x, float y, float z);
+    void leap_position(float x, float y, float z);
     
 private:
     void createFrameBuffers();
@@ -38,5 +40,8 @@ private:
     SimpleParticleModel *mSimpleParticleModel;
     SimpleParticleShader *mSimpleParticleShader;
     
+    GLuint mParticleTexture;
+    
     float timer;
+    glm::vec3 lightPosition;
 };

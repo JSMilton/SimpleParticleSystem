@@ -371,12 +371,15 @@ static CVReturn MyDisplayLinkCallback(CVDisplayLinkRef displayLink,
         const LeapVector *position = [hand palmPosition];
         const LeapVector *velocity = [hand palmVelocity];
         LeapVector *boxCenter = frame.interactionBox.center;
+        LeapVector *normalisedPoint = [frame.interactionBox normalizePoint:position clamp:YES];
         
         if (position.x > boxCenter.x){
             glRenderer->leap_rightHandVelocity(velocity.x, velocity.y, velocity.z);
         } else {
             glRenderer->leap_leftHandVelocity(velocity.x, velocity.y, velocity.z);
         }
+        
+        glRenderer->leap_position(normalisedPoint.x, normalisedPoint.y, normalisedPoint.z);
     }
     
         // Calculate the hand's pitch, roll, and yaw angles

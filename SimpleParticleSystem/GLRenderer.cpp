@@ -9,9 +9,9 @@
 #include "GLRenderer.h"
 #include "SimpleParticleModel.h"
 #include "SimpleParticleShader.h"
+#include "ImageLoader.h"
 
 void GLRenderer::initOpenGL() {
-    glEnable(GL_DEPTH_TEST);
     glClearColor(0.f, 0.f, 0.f, 1.0f);
     mViewWidth = 1200;
     mViewHeight = 800;
@@ -19,6 +19,20 @@ void GLRenderer::initOpenGL() {
     
     mSimpleParticleModel = new SimpleParticleModel;
     mSimpleParticleShader = new SimpleParticleShader;
+    
+    lightPosition = glm::vec3(0.0,10.0,10.0);
+    
+    ImageLoader *myImage = new ImageLoader("Droplet");
+    glGenTextures(1, &mParticleTexture);
+    glBindTexture(GL_TEXTURE_2D, mParticleTexture);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA,
+                 (GLint)myImage->mWidth, (GLint)myImage->mHeight, 0, GL_RGBA,
+                 GL_UNSIGNED_BYTE, static_cast<const GLvoid*>(myImage->mImageData));
+
     
     render(0.0);
 }
@@ -33,6 +47,8 @@ void GLRenderer::render(float dt) {
     /* Render Particles. Enabling point re-sizing in vertex shader */
     glEnable (GL_PROGRAM_POINT_SIZE);
     glEnable (GL_BLEND);
+    //glEnable(GL_DEPTH_TEST);
+   // glDepthMask(GL_TRUE);
     glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glClearColor(0, 0, 0, 1);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -43,7 +59,10 @@ void GLRenderer::render(float dt) {
     glUniform1f (mSimpleParticleShader->mElapsedTimeHandle, timer += (GLfloat)dt);
     glUniformMatrix4fv(mSimpleParticleShader->mProjectionMatrixHandle, 1, GL_FALSE, glm::value_ptr(mProjectionMatrix));
     glUniformMatrix4fv(mSimpleParticleShader->mViewMatrixHandle, 1, GL_FALSE, glm::value_ptr(mViewMatrix));
-    
+    glUniform3fv(mSimpleParticleShader->mLightPositionWorldHandle, 1, glm::value_ptr(lightPosition));
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, mParticleTexture);
+    glUniform1i(mSimpleParticleShader->mTextureHandle, 0);
     // draw points 0-3 from the currently bound VAO with current in-use shader
     mSimpleParticleModel->drawArrays();
     mSimpleParticleShader->disable();
@@ -63,11 +82,36 @@ void GLRenderer::reshape(int width, int height) {
     createFrameBuffers();
 }
 
-int velMod = 1500;
+int velMod = 5000;
+
+void GLRenderer::leap_velocity(float x, float y, float z) {
+    
+//    if(lightPosition.x < 50 && lightPosition.x > -50){
+//        lightPosition.x += x/1000;
+//    }
+//    
+//    if(lightPosition.y < 50 && lightPosition.y > -50){
+//        lightPosition.y += y/1000;
+//    }
+//    
+//    if(lightPosition.z < 50 && lightPosition.z > -50){
+//        lightPosition.z += z/1000;
+//    }
+}
+
 void GLRenderer::leap_rightHandVelocity(float x, float y, float z) {
+    //timer += x / velMod;
 }
 
 void GLRenderer::leap_leftHandVelocity(float x, float y, float z) {
+}
+
+// values are normalised
+void GLRenderer::leap_position(float x, float y, float z) {
+    float range = 20;
+    lightPosition.x = (range * x) - (range / 2);
+    lightPosition.y = (range * y) - (range / 2);
+    lightPosition.z = (range * z) - (range / 2);
 }
 
 void GLRenderer::freeGLBindings(void) const

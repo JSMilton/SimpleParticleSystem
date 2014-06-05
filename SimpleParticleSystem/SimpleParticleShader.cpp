@@ -13,4 +13,6 @@ SimpleParticleShader::SimpleParticleShader() : BaseShader("simpleParticle", "sim
     mViewMatrixHandle = getUniformLocation("uViewMatrix");
     mEmitterPositionHandle = getUniformLocation("uEmitterPosition");
     mElapsedTimeHandle = getUniformLocation("uElapsedTime");
+    mLightPositionWorldHandle = getUniformLocation("uLightPositionWorld");
+    mTextureHandle = getUniformLocation("tex");
 }

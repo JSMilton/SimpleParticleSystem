@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		43CD1FA819407425007E996B /* sceneColor.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 43CD1FA619407425007E996B /* sceneColor.vsh */; };
+		43CD1FA919407425007E996B /* sceneColor.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 43CD1FA719407425007E996B /* sceneColor.fsh */; };
+		43CD1FB019409D20007E996B /* ImageLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43CD1FAE19409D20007E996B /* ImageLoader.cpp */; };
+		43CD1FB219409DD1007E996B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43CD1FB119409DD1007E996B /* QuartzCore.framework */; };
+		43CD1FB41940A7CB007E996B /* Droplet.png in Resources */ = {isa = PBXBuildFile; fileRef = 43CD1FB31940A7CB007E996B /* Droplet.png */; };
 		43D4CF55193F45C9004DCABB /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43D4CF54193F45C9004DCABB /* Cocoa.framework */; };
 		43D4CF5F193F45C9004DCABB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43D4CF5D193F45C9004DCABB /* InfoPlist.strings */; };
 		43D4CF61193F45C9004DCABB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D4CF60193F45C9004DCABB /* main.m */; };
@@ -167,6 +172,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		43CD1FA619407425007E996B /* sceneColor.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = sceneColor.vsh; sourceTree = "<group>"; };
+		43CD1FA719407425007E996B /* sceneColor.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = sceneColor.fsh; sourceTree = "<group>"; };
+		43CD1FAA19409CFE007E996B /* imageUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = imageUtil.m; sourceTree = "<group>"; };
+		43CD1FAB19409CFE007E996B /* imageUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imageUtil.h; sourceTree = "<group>"; };
+		43CD1FAE19409D20007E996B /* ImageLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImageLoader.cpp; sourceTree = "<group>"; };
+		43CD1FAF19409D20007E996B /* ImageLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageLoader.h; sourceTree = "<group>"; };
+		43CD1FB119409DD1007E996B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		43CD1FB31940A7CB007E996B /* Droplet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Droplet.png; sourceTree = "<group>"; };
 		43D4CF51193F45C9004DCABB /* SimpleParticleSystem.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleParticleSystem.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		43D4CF54193F45C9004DCABB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		43D4CF57193F45C9004DCABB /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -476,6 +489,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43CD1FB219409DD1007E996B /* QuartzCore.framework in Frameworks */,
 				43D4D737193F7ADE004DCABB /* libLeap.dylib in Frameworks */,
 				43D4D5AE193F494D004DCABB /* OpenGL.framework in Frameworks */,
 				43D4D5AC193F4947004DCABB /* CoreFoundation.framework in Frameworks */,
@@ -495,6 +509,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		43CD1FAD19409D11007E996B /* Utility Classes */ = {
+			isa = PBXGroup;
+			children = (
+				43CD1FAF19409D20007E996B /* ImageLoader.h */,
+				43CD1FAE19409D20007E996B /* ImageLoader.cpp */,
+			);
+			name = "Utility Classes";
+			sourceTree = "<group>";
+		};
 		43D4CF48193F45C9004DCABB = {
 			isa = PBXGroup;
 			children = (
@@ -517,6 +540,7 @@
 		43D4CF53193F45C9004DCABB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				43CD1FB119409DD1007E996B /* QuartzCore.framework */,
 				43D4D736193F7ADE004DCABB /* libLeap.dylib */,
 				43D4D5AD193F494D004DCABB /* OpenGL.framework */,
 				43D4D5AB193F4947004DCABB /* CoreFoundation.framework */,
@@ -540,7 +564,10 @@
 		43D4CF5A193F45C9004DCABB /* SimpleParticleSystem */ = {
 			isa = PBXGroup;
 			children = (
+				43CD1FB31940A7CB007E996B /* Droplet.png */,
 				43D4D726193F4E37004DCABB /* glUtil.h */,
+				43CD1FAA19409CFE007E996B /* imageUtil.m */,
+				43CD1FAB19409CFE007E996B /* imageUtil.h */,
 				43D4D5B9193F4E14004DCABB /* glm */,
 				43D4D5B6193F4B38004DCABB /* Leap Motion SDK */,
 				43D4D5AA193F4926004DCABB /* Classes */,
@@ -637,6 +664,8 @@
 			children = (
 				43D4D72A193F6D27004DCABB /* simpleParticle.vsh */,
 				43D4D72C193F6D2D004DCABB /* simpleParticle.fsh */,
+				43CD1FA619407425007E996B /* sceneColor.vsh */,
+				43CD1FA719407425007E996B /* sceneColor.fsh */,
 			);
 			name = Shaders;
 			sourceTree = "<group>";
@@ -644,6 +673,7 @@
 		43D4D5AA193F4926004DCABB /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				43CD1FAD19409D11007E996B /* Utility Classes */,
 				43D4D598193F48AF004DCABB /* Model Classes */,
 				43D4D597193F48A0004DCABB /* Shader Classes */,
 				43D4D593193F4884004DCABB /* Renderer */,
@@ -1058,6 +1088,7 @@
 				43D4D717193F4E14004DCABB /* rotate_vector.inl in Resources */,
 				43D4D6C5193F4E14004DCABB /* func_vector_relational.inl in Resources */,
 				43D4D6D1193F4E14004DCABB /* type_mat.inl in Resources */,
+				43CD1FA819407425007E996B /* sceneColor.vsh in Resources */,
 				43D4D707193F4E14004DCABB /* matrix_query.inl in Resources */,
 				43D4D6EF193F4E14004DCABB /* closest_point.inl in Resources */,
 				43D4D703193F4E14004DCABB /* matrix_cross_product.inl in Resources */,
@@ -1091,6 +1122,7 @@
 				43D4D702193F4E14004DCABB /* log_base.inl in Resources */,
 				43D4D704193F4E14004DCABB /* matrix_interpolation.inl in Resources */,
 				43D4D72D193F6D2D004DCABB /* simpleParticle.fsh in Resources */,
+				43CD1FB41940A7CB007E996B /* Droplet.png in Resources */,
 				43D4D6F0193F4E14004DCABB /* color_space.inl in Resources */,
 				43D4D724193F4E14004DCABB /* vector_query.inl in Resources */,
 				43D4D5B8193F4C22004DCABB /* MainMenu.xib in Resources */,
@@ -1116,6 +1148,7 @@
 				43D4D6C1193F4E14004DCABB /* func_matrix.inl in Resources */,
 				43D4D6CB193F4E14004DCABB /* intrinsic_matrix.inl in Resources */,
 				43D4D718193F4E14004DCABB /* scalar_relational.inl in Resources */,
+				43CD1FA919407425007E996B /* sceneColor.fsh in Resources */,
 				43D4D6CF193F4E14004DCABB /* type_gentype.inl in Resources */,
 				43D4D6FD193F4E14004DCABB /* inertia.inl in Resources */,
 				43D4D719193F4E14004DCABB /* simd_mat4.inl in Resources */,
@@ -1171,6 +1204,7 @@
 				43D4D591193F4874004DCABB /* GLEssentialsWindowController.m in Sources */,
 				43D4D733193F73D0004DCABB /* BaseDrawableObject.cpp in Sources */,
 				43D4CF61193F45C9004DCABB /* main.m in Sources */,
+				43CD1FB019409D20007E996B /* ImageLoader.cpp in Sources */,
 				43D4D5B5193F4B35004DCABB /* LeapObjectiveC.mm in Sources */,
 				43D4D6C6193F4E14004DCABB /* glm.cpp in Sources */,
 				43D4D590193F4874004DCABB /* GLEssentialsFullscreenWindow.m in Sources */,
@@ -1399,6 +1433,7 @@
 				43D4CF84193F45C9004DCABB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		43D4CF85193F45C9004DCABB /* Build configuration list for PBXNativeTarget "SimpleParticleSystemTests" */ = {
 			isa = XCConfigurationList;
@@ -1407,6 +1442,7 @@
 				43D4CF87193F45C9004DCABB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
