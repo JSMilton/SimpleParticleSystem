@@ -25,6 +25,9 @@ public:
     void leap_leftHandVelocity(float x, float y, float z);
     void leap_position(float x, float y, float z);
     
+    void moveLightSourceByNormalisedVector(float x, float y, float z);
+    void changeParticleVelocity(float velocity);
+    
 private:
     void createFrameBuffers();
     void resetFramebuffers();

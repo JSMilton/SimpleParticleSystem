@@ -1,5 +1,5 @@
 /******************************************************************************\
-* Copyright (C) 2012-2013 Leap Motion, Inc. All rights reserved.               *
+* Copyright (C) 2012-2013 Leap Motion, Inc. All rights reserved.
 * Leap Motion proprietary and confidential. Not for distribution.              *
 * Use subject to the terms of the Leap Motion SDK Agreement available at       *
 * https://developer.leapmotion.com/sdk_agreement, or another agreement         *
@@ -350,7 +350,6 @@
                                                            zBasis:[[LeapVector alloc] initWithLeapVector:&inverted.zBasis]
                                                            origin:[[LeapVector alloc] initWithLeapVector:&inverted.origin]];
     return rigidInverse;
-    
 }
 
 - (LeapMatrix *)times:(const LeapMatrix *)other
@@ -444,7 +443,16 @@
 {
     self = [super init];
     if (self) {
-        _interfacePointable = new Leap::Pointable(*(const Leap::Pointable *)pointable);
+        const Leap::Pointable *castedPointable = (const Leap::Pointable *)pointable;
+        if (castedPointable->isFinger()) {
+            _interfacePointable = new Leap::Finger(*(const Leap::Finger *)castedPointable);
+        }
+        else if (castedPointable->isTool()) {
+            _interfacePointable = new Leap::Tool(*(const Leap::Tool *)castedPointable);
+        }
+        else {
+            _interfacePointable = new Leap::Pointable(*castedPointable);
+        }
         _frame = frame;
         _hand = hand;
     }
@@ -519,6 +527,11 @@
     return _interfacePointable->isTool();
 }
 
+- (BOOL)isExtended
+{
+    return _interfacePointable->isExtended();
+}
+
 - (BOOL)isValid
 {
     return _interfacePointable->isValid();
@@ -553,7 +566,7 @@
 
 - (LeapHand *)hand
 {
-    NSAssert(_hand != nil, @"Pointable's finger property has been deallocated due to weak ARC reference. Retain a strong pointer to this hand if you wish to access it later.");
+    NSAssert(_hand != nil, @"Pointable's hand property has been deallocated due to weak ARC reference. Retain a strong pointer to this hand (or parent LeapGesture object, when applicable) if you wish to access it later.");
     return _hand;
 }
 
@@ -581,6 +594,19 @@
         return @"Invalid Finger";
     }
     return [NSString stringWithFormat:@"Finger Id:%d", [self id]];
+}
+
+- (LeapVector *)jointPosition:(LeapFingerJoint)jointIx
+{
+    const Leap::Finger *finger = (const Leap::Finger *)[self interfacePointable];
+    Leap::Vector v = finger->jointPosition((Leap::Finger::Joint)jointIx);
+    return [[LeapVector alloc] initWithLeapVector:&v];
+}
+
+- (LeapFingerType)type
+{
+    const Leap::Finger *finger = (const Leap::Finger *)[self interfacePointable];
+    return (LeapFingerType)finger->type();
 }
 
 + (LeapPointable *)invalid
@@ -731,6 +757,16 @@
     return _interfaceHand->sphereRadius();
 }
 
+- (float) pinchStrength
+{
+    return _interfaceHand->pinchStrength();
+}
+
+- (float) grabStrength
+{
+    return _interfaceHand->grabStrength();
+}
+
 - (BOOL)isValid
 {
     return _interfaceHand->isValid();
@@ -799,6 +835,21 @@
 - (float)timeVisible
 {
     return _interfaceHand->timeVisible();
+}
+
+- (float)confidence
+{
+    return _interfaceHand->confidence();
+}
+
+- (BOOL)isLeft
+{
+    return _interfaceHand->isLeft();
+}
+
+- (BOOL)isRight
+{
+    return _interfaceHand->isRight();
 }
 
 + (LeapHand *)invalid
@@ -976,6 +1027,21 @@
     return _interfaceDevice->distanceToBoundary(v);
 }
 
+- (BOOL)isEmbedded
+{
+    return _interfaceDevice->isEmbedded();
+}
+
+- (BOOL)isStreaming
+{
+    return _interfaceDevice->isStreaming();
+}
+
+- (LeapDeviceType)type
+{
+    return (LeapDeviceType)_interfaceDevice->type();
+}
+
 - (BOOL)isValid
 {
     return _interfaceDevice->isValid();
@@ -1078,6 +1144,10 @@
 
 /////////////////////////////////////////////////////////////////////////
 //GESTURE
+@interface LeapGesture ()
+@property (nonatomic, strong, readonly)NSDictionary *handFromID;
+@end
+
 @implementation LeapGesture
 {
     Leap::Gesture *_interfaceGesture;
@@ -1086,6 +1156,7 @@
 @synthesize frame = _frame;
 @synthesize hands = _hands;
 @synthesize pointables = _pointables;
+@synthesize handFromID = _handFromID;
 
 - (id)initWithGesture:(void *)leapGesture frame:(LeapFrame *)frame
 {
@@ -1109,7 +1180,7 @@
                 _interfaceGesture = new Leap::Gesture(*(const Leap::Gesture *)leapGesture);
         }
         _frame = frame;
-        
+
         NSMutableArray *hands_ar = [NSMutableArray array];
         for (int i = 0; i < _interfaceGesture->hands().count(); i++) {
             const Leap::Hand &tmpLeapHand = _interfaceGesture->hands()[i];
@@ -1118,7 +1189,7 @@
             [dictionary setObject:hand forKey:[NSNumber numberWithUnsignedInteger:tmpLeapHand.id()]];
         }
         _hands = [NSArray arrayWithArray:hands_ar];
-        
+
         NSMutableArray *pointables_ar = [NSMutableArray array];
         for (int i = 0; i < _interfaceGesture->pointables().count(); i++) {
             const Leap::Pointable &tmpLeapPointable = _interfaceGesture->pointables()[i];
@@ -1133,7 +1204,7 @@
             [pointables_ar addObject:pointable];
         }
         _pointables = [NSArray arrayWithArray:pointables_ar];
-
+        _handFromID = [NSDictionary dictionaryWithDictionary:dictionary];
     }
     return self;
 }
@@ -1228,7 +1299,12 @@
 - (LeapPointable *)pointable
 {
     const Leap::Pointable &leapPointable = ((const Leap::SwipeGesture *)[self interfaceGesture])->pointable();
-    return [[LeapPointable typedPointableAlloc:(void *)&leapPointable]initWithPointable:(void *)&leapPointable frame:[self frame] hand:nil];
+    const Leap::Hand &leapHand = leapPointable.hand();
+    LeapHand *hand = [[self handFromID] objectForKey:[NSNumber numberWithUnsignedInteger:leapHand.id()]];
+    if (hand == nil) {
+        hand = [LeapHand invalid];
+    }
+    return [[LeapPointable typedPointableAlloc:(void *)&leapPointable]initWithPointable:(void *)&leapPointable frame:[self frame] hand:hand];
 }
 
 @end
@@ -1262,7 +1338,12 @@
 - (LeapPointable *)pointable
 {
     const Leap::Pointable &leapPointable = ((const Leap::CircleGesture *)[self interfaceGesture])->pointable();
-    return [[LeapPointable typedPointableAlloc:(void *)&leapPointable]initWithPointable:(void *)&leapPointable frame:[self frame] hand:nil];
+    const Leap::Hand &leapHand = leapPointable.hand();
+    LeapHand *hand = [[self handFromID] objectForKey:[NSNumber numberWithUnsignedInteger:leapHand.id()]];
+    if (hand == nil) {
+        hand = [LeapHand invalid];
+    }
+    return [[LeapPointable typedPointableAlloc:(void *)&leapPointable]initWithPointable:(void *)&leapPointable frame:[self frame] hand:hand];
 }
 
 @end
@@ -1291,7 +1372,12 @@
 - (LeapPointable *)pointable
 {
     const Leap::Pointable &leapPointable = ((const Leap::ScreenTapGesture *)[self interfaceGesture])->pointable();
-    return [[LeapPointable typedPointableAlloc:(void *)&leapPointable]initWithPointable:(void *)&leapPointable frame:[self frame] hand:nil];
+    const Leap::Hand &leapHand = leapPointable.hand();
+    LeapHand *hand = [[self handFromID] objectForKey:[NSNumber numberWithUnsignedInteger:leapHand.id()]];
+    if (hand == nil) {
+        hand = [LeapHand invalid];
+    }
+    return [[LeapPointable typedPointableAlloc:(void *)&leapPointable]initWithPointable:(void *)&leapPointable frame:[self frame] hand:hand];
 }
 
 @end
@@ -1320,7 +1406,12 @@
 - (LeapPointable *)pointable
 {
     const Leap::Pointable &leapPointable = ((const Leap::KeyTapGesture *)[self interfaceGesture])->pointable();
-    return [[LeapPointable typedPointableAlloc:(void *)&leapPointable]initWithPointable:(void *)&leapPointable frame:[self frame] hand:nil];
+    const Leap::Hand &leapHand = leapPointable.hand();
+    LeapHand *hand = [[self handFromID] objectForKey:[NSNumber numberWithUnsignedInteger:leapHand.id()]];
+    if (hand == nil) {
+        hand = [LeapHand invalid];
+    }
+    return [[LeapPointable typedPointableAlloc:(void *)&leapPointable]initWithPointable:(void *)&leapPointable frame:[self frame] hand:hand];
 }
 
 @end
@@ -1732,6 +1823,27 @@ public:
         }
     }
 
+    virtual void onServiceConnect(const Leap::Controller& leapController)
+    {
+      @autoreleasepool {
+        [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadName:@"OnServiceConnect" object:_controller];
+      }
+    }
+
+    virtual void onServiceDisconnect(const Leap::Controller& leapController)
+    {
+      @autoreleasepool {
+        [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadName:@"OnServiceDisconnect" object:_controller];
+      }
+    }
+
+    virtual void onDeviceChange(const Leap::Controller& leapController)
+    {
+      @autoreleasepool {
+        [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadName:@"OnDeviceChange" object:_controller];
+      }
+    }
+
     virtual void onExit(const Leap::Controller& leapController)
     {
         @autoreleasepool {
@@ -1782,7 +1894,7 @@ public:
             }
         }
     }
-    
+
     virtual void onConnect(const Leap::Controller& leapController)
     {
         @autoreleasepool {
@@ -1791,7 +1903,7 @@ public:
             }
         }
     }
-    
+
     virtual void onDisconnect(const Leap::Controller& leapController)
     {
         @autoreleasepool {
@@ -1800,7 +1912,34 @@ public:
             }
         }
     }
-    
+
+    virtual void onServiceConnect(const Leap::Controller& leapController)
+    {
+      @autoreleasepool {
+        if ([_delegate respondsToSelector:@selector(onServiceConnect:)]) {
+          [_delegate onServiceConnect:_controller];
+        }
+      }
+    }
+
+    virtual void onServiceDisconnect(const Leap::Controller& leapController)
+    {
+      @autoreleasepool {
+        if ([_delegate respondsToSelector:@selector(onServiceDisconnect:)]) {
+          [_delegate onServiceDisconnect:_controller];
+        }
+      }
+    }
+
+    virtual void onDeviceChange(const Leap::Controller& leapController)
+    {
+      @autoreleasepool {
+        if ([_delegate respondsToSelector:@selector(onDeviceChange:)]) {
+          [_delegate onDeviceChange:_controller];
+        }
+      }
+    }
+
     virtual void onExit(const Leap::Controller& leapController)
     {
         @autoreleasepool {
@@ -1809,7 +1948,7 @@ public:
             }
         }
     }
-    
+
     virtual void onFrame(const Leap::Controller& leapController)
     {
         @autoreleasepool {
@@ -1841,7 +1980,7 @@ public:
     {
         _controller = controller;
     }
-    
+
     void initWithDelegate(id<LeapDelegate> delegate)
     {
         _delegate = delegate;
@@ -1903,6 +2042,15 @@ private:
         if ([leapListener respondsToSelector:@selector(onDisconnect:)]) {
             [nc addObserver:leapListener selector:@selector(onDisconnect:) name:@"OnDisconnect" object:self];
         }
+        if ([leapListener respondsToSelector:@selector(onServiceConnect:)]) {
+            [nc addObserver:leapListener selector:@selector(onServiceConnect:)   name:@"OnServiceConnect" object:self];
+        }
+        if ([leapListener respondsToSelector:@selector(onServiceDisconnect:)]) {
+            [nc addObserver:leapListener selector:@selector(onServiceDisconnect:) name:@"OnServiceDisconnect" object:self];
+        }
+        if ([leapListener respondsToSelector:@selector(onDeviceChange:)]) {
+            [nc addObserver:leapListener selector:@selector(onDeviceChange:) name:@"OnDeviceChange" object:self];
+        }
         if ([leapListener respondsToSelector:@selector(onExit:)]) {
             [nc addObserver:leapListener selector:@selector(onExit:) name:@"OnExit" object:self];
         }
@@ -1929,7 +2077,7 @@ private:
 {
     _controller->setPolicyFlags((Leap::Controller::PolicyFlag)flags);
 }
- 
+
 - (BOOL)addListener:(id<LeapListener>)listener
 {
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
@@ -1941,6 +2089,15 @@ private:
     }
     if ([listener respondsToSelector:@selector(onDisconnect:)]) {
         [nc addObserver:listener selector:@selector(onDisconnect:) name:@"OnDisconnect" object:self];
+    }
+    if ([listener respondsToSelector:@selector(onServiceConnect:)]) {
+      [nc addObserver:listener selector:@selector(onServiceConnect:) name:@"OnServiceConnect" object:self];
+    }
+    if ([listener respondsToSelector:@selector(onServiceDisconnect:)]) {
+      [nc addObserver:listener selector:@selector(onServiceDisconnect:) name:@"OnServiceDisconnect" object:self];
+    }
+    if ([listener respondsToSelector:@selector(onDeviceChange:)]) {
+      [nc addObserver:listener selector:@selector(onDeviceChange:) name:@"OnDeviceChange" object:self];
     }
     if ([listener respondsToSelector:@selector(onExit:)]) {
         [nc addObserver:listener selector:@selector(onExit:) name:@"OnExit" object:self];
@@ -2034,6 +2191,11 @@ private:
 - (BOOL)isConnected
 {
     return _controller->isConnected();
+}
+
+- (BOOL)isServiceConnected
+{
+  return _controller->isServiceConnected();
 }
 
 - (BOOL)hasFocus
@@ -2157,6 +2319,33 @@ private:
     return [self objectAtIndex:minPosition];
 }
 
+- (NSArray *)extended
+{
+    NSMutableArray *pointables_ar = [NSMutableArray array];
+    for (NSUInteger i = 0; i < [self count]; i++) {
+        LeapPointable *pointable = [self objectAtIndex:i];
+        if ([pointable isExtended]) {
+            [pointables_ar addObject:pointable];
+        }
+    }
+    return [NSArray arrayWithArray:pointables_ar];
+}
+
+- (NSArray *)fingerType:(LeapFingerType)type;
+{
+    NSMutableArray *fingers_ar = [NSMutableArray array];
+    for (NSUInteger i = 0; i < [self count]; i++) {
+        LeapPointable *pointable = [self objectAtIndex:i];
+        if ([pointable isFinger]) {
+            LeapFinger *finger = (LeapFinger *)pointable;
+            if ([finger type] == type) {
+                [fingers_ar addObject:pointable];
+            }
+        }
+    }
+    return [NSArray arrayWithArray:fingers_ar];
+}
+
 @end
 
 
@@ -2226,4 +2415,4 @@ private:
 
 const float LEAP_PI = Leap::PI;
 const float LEAP_DEG_TO_RAD = Leap::DEG_TO_RAD;
-const float LEAP_RAD_TO_DEG = Leap::RAD_TO_DEG; 
+const float LEAP_RAD_TO_DEG = Leap::RAD_TO_DEG;

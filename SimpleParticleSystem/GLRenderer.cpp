@@ -47,8 +47,6 @@ void GLRenderer::render(float dt) {
     /* Render Particles. Enabling point re-sizing in vertex shader */
     glEnable (GL_PROGRAM_POINT_SIZE);
     glEnable (GL_BLEND);
-    //glEnable(GL_DEPTH_TEST);
-   // glDepthMask(GL_TRUE);
     glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glClearColor(0, 0, 0, 1);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -122,6 +120,17 @@ void GLRenderer::freeGLBindings(void) const
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
     glBindTexture(GL_TEXTURE_2D,          0);
     glBindTexture(GL_TEXTURE_CUBE_MAP,    0);
+}
+
+void GLRenderer::moveLightSourceByNormalisedVector(float x, float y, float z) {
+    float range = 20;
+    lightPosition.x = (range * x) - (range / 2);
+    lightPosition.y = (range * y) - (range / 2);
+    lightPosition.z = (range * z) - (range / 2);
+}
+
+void GLRenderer::changeParticleVelocity(float velocity) {
+    timer += velocity / velMod;
 }
 
 void GLRenderer::resetFramebuffers() {
