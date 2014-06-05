@@ -37,4 +37,6 @@ private:
     
     SimpleParticleModel *mSimpleParticleModel;
     SimpleParticleShader *mSimpleParticleShader;
+    
+    float timer;
 };

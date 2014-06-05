@@ -33,13 +33,14 @@ void GLRenderer::render(float dt) {
     /* Render Particles. Enabling point re-sizing in vertex shader */
     glEnable (GL_PROGRAM_POINT_SIZE);
     glEnable (GL_BLEND);
+    glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glClearColor(0, 0, 0, 1);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     mSimpleParticleShader->enable();
     
     /* update time in shaders */
-    glUniform3f(mSimpleParticleShader->mEmitterPositionHandle, 1, 1, 0);
-    glUniform1f (mSimpleParticleShader->mElapsedTimeHandle, (GLfloat)dt);
+    glUniform3f(mSimpleParticleShader->mEmitterPositionHandle, 0, 0, 0);
+    glUniform1f (mSimpleParticleShader->mElapsedTimeHandle, timer += (GLfloat)dt);
     glUniformMatrix4fv(mSimpleParticleShader->mProjectionMatrixHandle, 1, GL_FALSE, glm::value_ptr(mProjectionMatrix));
     glUniformMatrix4fv(mSimpleParticleShader->mViewMatrixHandle, 1, GL_FALSE, glm::value_ptr(mViewMatrix));
     
@@ -57,7 +58,7 @@ void GLRenderer::reshape(int width, int height) {
     mViewWidth = width;
     mViewHeight = height;
     mProjectionMatrix = glm::perspective(45.0f, (float)width/(float)height, 0.1f, 100.0f);
-    mViewMatrix = glm::lookAt(glm::vec3(0,0,20), glm::vec3(0,0,0), glm::vec3(0,1,0));
+    mViewMatrix = glm::lookAt(glm::vec3(0,0,3), glm::vec3(0,0,0), glm::vec3(0,1,0));
     
     createFrameBuffers();
 }

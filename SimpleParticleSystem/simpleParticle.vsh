@@ -23,8 +23,8 @@ void main() {
     // acceleration (gravity)
     p += vI * t + 0.5 * a * t * t;
     // gradually make particle fade to invisible over 3 seconds
-    opacity = 1.0 - (t / 3.0);
+    opacity = 1.0 - ((t*0.65) / 3.0);
     
     gl_Position = uProjectionMatrix * uViewMatrix * vec4 (p, 1.0);
-    gl_PointSize = 15.0; // size in pixels
+    gl_PointSize = 5.0; // size in pixels
 }
