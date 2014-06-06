@@ -8,10 +8,10 @@ uniform vec3 uEmitterPosition; // emitter position in world coordinates
 uniform float uElapsedTime; // system time in seconds
 
 // the fragment shader can use this for it's output colour's alpha component
-out vec3 outPosition;
-out vec3 outVelocity;
-out float outStartTime;
-out float outOpacity;
+layout (location = 0) out vec3 outPosition;
+layout (location = 1) out vec3 outVelocity;
+layout (location = 2) out float outStartTime;
+layout (location = 3) out float outOpacity;
 
 void main() {
     // work out the elapsed time for _this particle_ after its start time
@@ -31,10 +31,10 @@ void main() {
     vec3 v = inVelocity;
     // this is a standard kinematics equation of motion with velocity and
     // acceleration (gravity)
-    p += v * a;
+    //p += v * a;
     outPosition = p;
     outVelocity = v;
     outStartTime = inStartTime;
     // gradually make particle fade to invisible over 3 seconds
-    outOpacity = inOpacity - 0.2;// 1.0 - ((t) / 3.0);
+    outOpacity = 0;// 1.0 - ((t) / 3.0);
 }

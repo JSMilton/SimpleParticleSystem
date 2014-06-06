@@ -23,7 +23,7 @@ SimpleParticleModel::SimpleParticleModel() : BaseDrawableObject() {
         particles[i].velocity.x = randx; // x
         particles[i].velocity.y = 1.0f; // y
         particles[i].velocity.z = randz; // z
-        particles[i].position = glm::vec3(randx,0,0);
+        particles[i].position = glm::vec3(0,0,0);
         particles[i].opacity = 0.0;
     }
     
@@ -34,10 +34,10 @@ SimpleParticleModel::SimpleParticleModel() : BaseDrawableObject() {
     glGenVertexArrays (1, &mVAO);
     glBindVertexArray (mVAO);
     glBindBuffer (GL_ARRAY_BUFFER, mVBO);
-    glVertexAttribPointer (0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
-    glVertexAttribPointer (1, 3, GL_FLOAT, GL_FALSE, sizeof(GL_FLOAT) * 3, NULL);
-    glVertexAttribPointer (2, 1, GL_FLOAT, GL_FALSE, sizeof(GL_FLOAT), NULL);
-    glVertexAttribPointer (3, 1, GL_FLOAT, GL_FALSE, sizeof(GL_FLOAT), NULL);
+    glVertexAttribPointer (0, 3, GL_FLOAT, GL_FALSE, sizeof(Particle), 0);
+    glVertexAttribPointer (1, 3, GL_FLOAT, GL_FALSE, sizeof(Particle), (GLvoid*)(sizeof(GL_FLOAT) * 3));
+    glVertexAttribPointer (2, 1, GL_FLOAT, GL_FALSE, sizeof(Particle), (GLvoid*)(sizeof(GL_FLOAT) * 6));
+    glVertexAttribPointer (3, 1, GL_FLOAT, GL_FALSE, sizeof(Particle), (GLvoid*)(sizeof(GL_FLOAT) * 7));
     glEnableVertexAttribArray(0);
     glEnableVertexAttribArray(1);
     glEnableVertexAttribArray(2);

@@ -38,7 +38,7 @@ void GLRenderer::initOpenGL() {
                  (GLint)myImage->mWidth, (GLint)myImage->mHeight, 0, GL_RGBA,
                  GL_UNSIGNED_BYTE, static_cast<const GLvoid*>(myImage->mImageData));
     
-    emitterPosition = glm::vec3(0,1,0);
+    emitterPosition = glm::vec3(0,0,0);
 
     glEnable (GL_PROGRAM_POINT_SIZE);
     glEnable (GL_BLEND);
