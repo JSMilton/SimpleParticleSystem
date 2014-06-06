@@ -19,12 +19,12 @@ using namespace std;
 class BaseShader {
 public:
     BaseShader(const char* vShader, const char* fShader);
-    
+    void linkProgram();
     GLint getUniformLocation(const char* uniformName);
     void enable();
     void disable();
     
-private:
+protected:
     GLuint mProgram;
 };
 

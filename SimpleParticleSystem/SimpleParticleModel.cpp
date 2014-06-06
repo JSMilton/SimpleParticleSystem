@@ -11,41 +11,37 @@
 #define PARTICLE_COUNT 10000 // tweak me to see if we need more/less particles
 
 SimpleParticleModel::SimpleParticleModel() : BaseDrawableObject() {
-    float vv[PARTICLE_COUNT * 3]; // start velocities vec3
-    float vt[PARTICLE_COUNT]; // start times
+    Particle particles[PARTICLE_COUNT];
     float t_accum = 0.0f; // start time
-    int j = 0;
     for (int i = 0; i < PARTICLE_COUNT; i++) {
         // start times
-        vt[i] = t_accum;
+        particles[i].startTime = t_accum;
         t_accum += 0.01f; // spacing for start times is 0.01 seconds
         // start velocities. randomly vary x and z components
         float randx = ((float)rand() / (float)RAND_MAX) * 1.0f - 0.5f;
         float randz = ((float)rand() / (float)RAND_MAX) * 1.0f - 0.5f;
-        vv[j] = randx; // x
-        vv[j + 1] = 1.0f; // y
-        vv[j + 2] = randz; // z
-        j+= 3;
+        particles[i].velocity.x = randx; // x
+        particles[i].velocity.y = 1.0f; // y
+        particles[i].velocity.z = randz; // z
+        particles[i].position = glm::vec3(randx,0,0);
+        particles[i].opacity = 0.0;
     }
     
-    GLuint velocity_vbo;
-    glGenBuffers (1, &velocity_vbo);
-    glBindBuffer (GL_ARRAY_BUFFER, velocity_vbo);
-    glBufferData (GL_ARRAY_BUFFER, sizeof (vv), vv, GL_STATIC_DRAW);
-    
-    GLuint time_vbo;
-    glGenBuffers (1, &time_vbo);
-    glBindBuffer (GL_ARRAY_BUFFER, time_vbo);
-    glBufferData (GL_ARRAY_BUFFER, sizeof (vt), vt, GL_STATIC_DRAW);
+    glGenBuffers (1, &mVBO);
+    glBindBuffer (GL_ARRAY_BUFFER, mVBO);
+    glBufferData (GL_ARRAY_BUFFER, sizeof (particles), particles, GL_STATIC_DRAW);
     
     glGenVertexArrays (1, &mVAO);
     glBindVertexArray (mVAO);
-    glBindBuffer (GL_ARRAY_BUFFER, velocity_vbo);
+    glBindBuffer (GL_ARRAY_BUFFER, mVBO);
     glVertexAttribPointer (0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
-    glBindBuffer (GL_ARRAY_BUFFER, time_vbo);
-    glVertexAttribPointer (1, 1, GL_FLOAT, GL_FALSE, 0, NULL);
-    glEnableVertexAttribArray (0);
-    glEnableVertexAttribArray (1);
+    glVertexAttribPointer (1, 3, GL_FLOAT, GL_FALSE, sizeof(GL_FLOAT) * 3, NULL);
+    glVertexAttribPointer (2, 1, GL_FLOAT, GL_FALSE, sizeof(GL_FLOAT), NULL);
+    glVertexAttribPointer (3, 1, GL_FLOAT, GL_FALSE, sizeof(GL_FLOAT), NULL);
+    glEnableVertexAttribArray(0);
+    glEnableVertexAttribArray(1);
+    glEnableVertexAttribArray(2);
+    glEnableVertexAttribArray(3);
     
     mNumVertices = PARTICLE_COUNT;
     mPrimitiveType = GL_POINTS;

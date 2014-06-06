@@ -142,10 +142,12 @@
 		43D4D724193F4E14004DCABB /* vector_query.inl in Resources */ = {isa = PBXBuildFile; fileRef = 43D4D6A5193F4E14004DCABB /* vector_query.inl */; };
 		43D4D725193F4E14004DCABB /* wrap.inl in Resources */ = {isa = PBXBuildFile; fileRef = 43D4D6A7193F4E14004DCABB /* wrap.inl */; };
 		43D4D729193F6A29004DCABB /* SimpleParticleShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43D4D727193F6A29004DCABB /* SimpleParticleShader.cpp */; };
-		43D4D72B193F6D27004DCABB /* simpleParticle.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 43D4D72A193F6D27004DCABB /* simpleParticle.vsh */; };
+		43D4D72B193F6D27004DCABB /* simpleParticleFeedback.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 43D4D72A193F6D27004DCABB /* simpleParticleFeedback.vsh */; };
 		43D4D72D193F6D2D004DCABB /* simpleParticle.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 43D4D72C193F6D2D004DCABB /* simpleParticle.fsh */; };
 		43D4D730193F6E4A004DCABB /* SimpleParticleModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43D4D72E193F6E4A004DCABB /* SimpleParticleModel.cpp */; };
 		43D4D733193F73D0004DCABB /* BaseDrawableObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43D4D731193F73D0004DCABB /* BaseDrawableObject.cpp */; };
+		43E569C81941E8DF00FBA3A5 /* SimpleParticleFeedbackShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43E569C61941E8DF00FBA3A5 /* SimpleParticleFeedbackShader.cpp */; };
+		43E569CA1941E9E000FBA3A5 /* simpleParticle.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 43E569C91941E9E000FBA3A5 /* simpleParticle.vsh */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -476,12 +478,15 @@
 		43D4D726193F4E37004DCABB /* glUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = glUtil.h; sourceTree = "<group>"; };
 		43D4D727193F6A29004DCABB /* SimpleParticleShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SimpleParticleShader.cpp; sourceTree = "<group>"; };
 		43D4D728193F6A29004DCABB /* SimpleParticleShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleParticleShader.h; sourceTree = "<group>"; };
-		43D4D72A193F6D27004DCABB /* simpleParticle.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = simpleParticle.vsh; sourceTree = "<group>"; };
+		43D4D72A193F6D27004DCABB /* simpleParticleFeedback.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = simpleParticleFeedback.vsh; sourceTree = "<group>"; };
 		43D4D72C193F6D2D004DCABB /* simpleParticle.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = simpleParticle.fsh; sourceTree = "<group>"; };
 		43D4D72E193F6E4A004DCABB /* SimpleParticleModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SimpleParticleModel.cpp; sourceTree = "<group>"; };
 		43D4D72F193F6E4A004DCABB /* SimpleParticleModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleParticleModel.h; sourceTree = "<group>"; };
 		43D4D731193F73D0004DCABB /* BaseDrawableObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseDrawableObject.cpp; sourceTree = "<group>"; };
 		43D4D732193F73D0004DCABB /* BaseDrawableObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseDrawableObject.h; sourceTree = "<group>"; };
+		43E569C61941E8DF00FBA3A5 /* SimpleParticleFeedbackShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SimpleParticleFeedbackShader.cpp; sourceTree = "<group>"; };
+		43E569C71941E8DF00FBA3A5 /* SimpleParticleFeedbackShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleParticleFeedbackShader.h; sourceTree = "<group>"; };
+		43E569C91941E9E000FBA3A5 /* simpleParticle.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = simpleParticle.vsh; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -640,6 +645,8 @@
 				43D4D59A193F48DB004DCABB /* BaseShader.cpp */,
 				43D4D728193F6A29004DCABB /* SimpleParticleShader.h */,
 				43D4D727193F6A29004DCABB /* SimpleParticleShader.cpp */,
+				43E569C71941E8DF00FBA3A5 /* SimpleParticleFeedbackShader.h */,
+				43E569C61941E8DF00FBA3A5 /* SimpleParticleFeedbackShader.cpp */,
 			);
 			name = "Shader Classes";
 			sourceTree = "<group>";
@@ -662,7 +669,8 @@
 		43D4D5A9193F4904004DCABB /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
-				43D4D72A193F6D27004DCABB /* simpleParticle.vsh */,
+				43D4D72A193F6D27004DCABB /* simpleParticleFeedback.vsh */,
+				43E569C91941E9E000FBA3A5 /* simpleParticle.vsh */,
 				43D4D72C193F6D2D004DCABB /* simpleParticle.fsh */,
 				43CD1FA619407425007E996B /* sceneColor.vsh */,
 				43CD1FA719407425007E996B /* sceneColor.fsh */,
@@ -1066,6 +1074,7 @@
 				43D4D6E2193F4E14004DCABB /* matrix_access.inl in Resources */,
 				43D4D6FC193F4E14004DCABB /* handed_coordinate_space.inl in Resources */,
 				43D4D6F1193F4E14004DCABB /* color_space_YCoCg.inl in Resources */,
+				43E569CA1941E9E000FBA3A5 /* simpleParticle.vsh in Resources */,
 				43D4D6F3193F4E14004DCABB /* component_wise.inl in Resources */,
 				43D4D71B193F4E14004DCABB /* simd_vec4.inl in Resources */,
 				43D4D701193F4E14004DCABB /* io.inl in Resources */,
@@ -1092,7 +1101,7 @@
 				43D4D707193F4E14004DCABB /* matrix_query.inl in Resources */,
 				43D4D6EF193F4E14004DCABB /* closest_point.inl in Resources */,
 				43D4D703193F4E14004DCABB /* matrix_cross_product.inl in Resources */,
-				43D4D72B193F6D27004DCABB /* simpleParticle.vsh in Resources */,
+				43D4D72B193F6D27004DCABB /* simpleParticleFeedback.vsh in Resources */,
 				43D4D6E0193F4E14004DCABB /* constants.inl in Resources */,
 				43D4D6F6193F4E14004DCABB /* extend.inl in Resources */,
 				43D4D6ED193F4E14004DCABB /* associated_min_max.inl in Resources */,
@@ -1200,6 +1209,7 @@
 				43D4D5A4193F48F1004DCABB /* ScreenQuadModel.cpp in Sources */,
 				43D4D729193F6A29004DCABB /* SimpleParticleShader.cpp in Sources */,
 				43D4D730193F6E4A004DCABB /* SimpleParticleModel.cpp in Sources */,
+				43E569C81941E8DF00FBA3A5 /* SimpleParticleFeedbackShader.cpp in Sources */,
 				43D4CF68193F45C9004DCABB /* AppDelegate.m in Sources */,
 				43D4D591193F4874004DCABB /* GLEssentialsWindowController.m in Sources */,
 				43D4D733193F73D0004DCABB /* BaseDrawableObject.cpp in Sources */,

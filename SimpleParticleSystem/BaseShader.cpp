@@ -82,83 +82,80 @@ BaseShader::BaseShader(const char* vShader, const char* fShader) {
 	mProgram = glCreateProgram();
     
     GetGLError();
-	
-	//////////////////////////////////////
-	// Specify and compile VertexShader //
-	//////////////////////////////////////
-	
-	// Allocate memory for the source string including the version preprocessor information
-	sourceString = getShaderString(vShader, "vsh");
     
-	GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
-	glShaderSource(vertexShader, 1, (const GLchar **)&(sourceString), NULL);
-	glCompileShader(vertexShader);
-	glGetShaderiv(vertexShader, GL_INFO_LOG_LENGTH, &logLength);
-	
-	if (logLength > 0)
-	{
-		GLchar *log = (GLchar*) malloc(logLength);
-		glGetShaderInfoLog(vertexShader, logLength, &logLength, log);
-        printf("Vtx shader compiled log: %s\n", log);
-		free(log);
-	}
-	
-	glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &status);
-	if (status == 0)
-	{
-		printf("Failed to compile vtx shader:\n%s\n", sourceString);
-	}
-	
-	free(sourceString);
-	sourceString = NULL;
-	
-	// Attach the vertex shader to our program
-	glAttachShader(mProgram, vertexShader);
-	
-	// Delete the vertex shader since it is now attached
-	// to the program, which will retain a reference to it
-	glDeleteShader(vertexShader);
-	
-	/////////////////////////////////////////
-	// Specify and compile Fragment Shader //
-	/////////////////////////////////////////
-	
-	// Allocate memory for the source string including the version preprocessor	 information
-	sourceString = getShaderString(fShader, "fsh");
-	
-	GLuint fragShader = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(fragShader, 1, (const GLchar **)&(sourceString), NULL);
-	glCompileShader(fragShader);
-	glGetShaderiv(fragShader, GL_INFO_LOG_LENGTH, &logLength);
-	if (logLength > 0)
-	{
-		GLchar *log = (GLchar*)malloc(logLength);
-		glGetShaderInfoLog(fragShader, logLength, &logLength, log);
-		printf("Frag Shader compile log:\n%s\n", log);
-		free(log);
-	}
-	
-	glGetShaderiv(fragShader, GL_COMPILE_STATUS, &status);
-	if (status == 0)
-	{
-		printf("Failed to compile frag shader:\n%s\n", sourceString);
-	}
-	
-	free(sourceString);
-	sourceString = NULL;
-	
-	// Attach the fragment shader to our program
-	glAttachShader(mProgram, fragShader);
-	
-	// Delete the fragment shader since it is now attached
-	// to the program, which will retain a reference to it
-	glDeleteShader(fragShader);
-	
-	//////////////////////
-	// Link the program //
-	//////////////////////
-	
-	glLinkProgram(mProgram);
+    if (vShader){
+        // Allocate memory for the source string including the version preprocessor information
+        sourceString = getShaderString(vShader, "vsh");
+        
+        GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
+        glShaderSource(vertexShader, 1, (const GLchar **)&(sourceString), NULL);
+        glCompileShader(vertexShader);
+        glGetShaderiv(vertexShader, GL_INFO_LOG_LENGTH, &logLength);
+        
+        if (logLength > 0)
+        {
+            GLchar *log = (GLchar*) malloc(logLength);
+            glGetShaderInfoLog(vertexShader, logLength, &logLength, log);
+            printf("Vtx shader compiled log: %s\n", log);
+            free(log);
+        }
+        
+        glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &status);
+        if (status == 0)
+        {
+            printf("Failed to compile vtx shader:\n%s\n", sourceString);
+        }
+        
+        free(sourceString);
+        sourceString = NULL;
+        
+        // Attach the vertex shader to our program
+        glAttachShader(mProgram, vertexShader);
+        
+        // Delete the vertex shader since it is now attached
+        // to the program, which will retain a reference to it
+        glDeleteShader(vertexShader);
+    }
+    
+    if (fShader){
+        // Allocate memory for the source string including the version preprocessor	 information
+        sourceString = getShaderString(fShader, "fsh");
+        
+        GLuint fragShader = glCreateShader(GL_FRAGMENT_SHADER);
+        glShaderSource(fragShader, 1, (const GLchar **)&(sourceString), NULL);
+        glCompileShader(fragShader);
+        glGetShaderiv(fragShader, GL_INFO_LOG_LENGTH, &logLength);
+        if (logLength > 0)
+        {
+            GLchar *log = (GLchar*)malloc(logLength);
+            glGetShaderInfoLog(fragShader, logLength, &logLength, log);
+            printf("Frag Shader compile log:\n%s\n", log);
+            free(log);
+        }
+        
+        glGetShaderiv(fragShader, GL_COMPILE_STATUS, &status);
+        if (status == 0)
+        {
+            printf("Failed to compile frag shader:\n%s\n", sourceString);
+        }
+        
+        free(sourceString);
+        sourceString = NULL;
+        
+        // Attach the fragment shader to our program
+        glAttachShader(mProgram, fragShader);
+        
+        // Delete the fragment shader since it is now attached
+        // to the program, which will retain a reference to it
+        glDeleteShader(fragShader);
+    }
+    
+   // linkProgram();
+}
+
+void BaseShader::linkProgram() {
+    GLint logLength, status;
+    glLinkProgram(mProgram);
 	glGetProgramiv(mProgram, GL_INFO_LOG_LENGTH, &logLength);
 	if (logLength > 0)
 	{
@@ -189,13 +186,13 @@ BaseShader::BaseShader(const char* vShader, const char* fShader) {
 	{
 		printf("Failed to validate program");
 	}
-	
-	//glUseProgram(mProgram);
     
     printf("prog is: %i\n", mProgram);
 	
 	GetGLError();
 }
+
+
 
 GLint BaseShader::getUniformLocation(const char *uniformName) {
     return glGetUniformLocation(mProgram, uniformName);

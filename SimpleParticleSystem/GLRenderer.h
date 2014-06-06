@@ -13,6 +13,8 @@
 
 class SimpleParticleModel;
 class SimpleParticleShader;
+class SimpleParticleFeedbackShader;
+class SimpleParticleModel;
 
 class GLRenderer {
 public:
@@ -42,9 +44,16 @@ private:
     
     SimpleParticleModel *mSimpleParticleModel;
     SimpleParticleShader *mSimpleParticleShader;
+    SimpleParticleFeedbackShader *mSimpleParticleFeedbackShader;
+    
+    SimpleParticleModel *mParticleModelA;
+    SimpleParticleModel *mParticleModelB;
     
     GLuint mParticleTexture;
     
     float timer;
     glm::vec3 lightPosition;
+    glm::vec3 emitterPosition;
+    
+    int mBuffer;
 };

@@ -7,8 +7,18 @@
 //
 
 #include "BaseDrawableObject.h"
+#include "glm/glm.hpp"
+
+typedef struct {
+    glm::vec3 position;
+    glm::vec3 velocity;
+    float startTime;
+    float opacity;
+}Particle;
 
 class SimpleParticleModel : public BaseDrawableObject {
 public:
     SimpleParticleModel();
+    
+    GLuint mVBO;
 };
