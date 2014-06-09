@@ -19,22 +19,23 @@ void main() {
     // allow time to loop around so particle emitter keeps going
     t = mod (t, 3.0);
     vec3 p;
-//    if (inOpacity < 0.1){
-//        p = uEmitterPosition;
-//        outOpacity = 1.0;
-//    } else {
+    if (inOpacity < 0.01){
+        p = uEmitterPosition;
+        outOpacity = 1.0;
+    } else {
         p = inPosition;
-//    }
+    }
 
     // gravity
     vec3 a = vec3 (0.0, -1.0, 0.0);
     vec3 v = inVelocity;
     // this is a standard kinematics equation of motion with velocity and
     // acceleration (gravity)
-    //p += v * a;
+    p += ((v * t + 0.5 * a * t * t) * 0.015);
+    // gradually make particle fade to invisible over 3 seconds
     outPosition = p;
     outVelocity = v;
     outStartTime = inStartTime;
     // gradually make particle fade to invisible over 3 seconds
-    outOpacity = 0;// 1.0 - ((t) / 3.0);
+    outOpacity = 1.0 - ((t) / 3.0);
 }

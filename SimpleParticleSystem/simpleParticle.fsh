@@ -49,5 +49,5 @@ void main () {
     
     // final colour
     outFragColor = texture(tex, texcoord) * vec4(Is + Id + Ia, 1);
-    outFragColor.a *= vOpacity;
+    outFragColor.a = vOpacity;
 }

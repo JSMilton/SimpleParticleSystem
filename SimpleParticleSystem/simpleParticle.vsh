@@ -12,9 +12,9 @@ out vec3 vPosition_eye;
 out mat4 vViewMatrix;
 
 void main() {
-    vOpacity = 1;
+    vOpacity = inOpacity;
     vPosition_eye = vec3(uViewMatrix * vec4 (inPosition, 1.0)).xyz;
     vViewMatrix = uViewMatrix;
-    gl_Position = uProjectionMatrix * uViewMatrix * vec4 (vec3(inOpacity,0,0), 1.0);
+    gl_Position = uProjectionMatrix * uViewMatrix * vec4 (inPosition, 1.0);
     gl_PointSize = 10.0; // size in pixels
 }

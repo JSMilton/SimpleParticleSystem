@@ -58,7 +58,7 @@ void GLRenderer::render(float dt) {
     
     mSimpleParticleFeedbackShader->enable();
     glUniform3fv(mSimpleParticleFeedbackShader->mEmitterPositionHandle, 1, glm::value_ptr(emitterPosition));
-    glUniform1f(mSimpleParticleFeedbackShader->mElapsedTimeHandle, timer);
+    glUniform1f(mSimpleParticleFeedbackShader->mElapsedTimeHandle, timer += (GLfloat)dt);
     
     if (mBuffer == 0){
         glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, mParticleModelA->mVBO);
@@ -143,14 +143,6 @@ void GLRenderer::leap_leftHandVelocity(float x, float y, float z) {
 
 // values are normalised
 void GLRenderer::leap_position(float x, float y, float z) {
-    float range = 20;
-//    lightPosition.x = (range * x) - (range / 2);
-//    lightPosition.y = (range * y) - (range / 2);
-//    lightPosition.z = (range * z) - (range / 2);
-    
-    emitterPosition.x = (range * x) - (range / 2);
-    emitterPosition.y = (range * y) - (range / 2);
-    emitterPosition.z = (range * z) - (range / 2);
 }
 
 void GLRenderer::freeGLBindings(void) const
@@ -164,7 +156,7 @@ void GLRenderer::freeGLBindings(void) const
 }
 
 void GLRenderer::moveLightSourceByNormalisedVector(float x, float y, float z) {
-    float range = 1;
+    float range = 2;
 //    lightPosition.x = (range * x) - (range / 2);
 //    lightPosition.y = (range * y) - (range / 2);
 //    lightPosition.z = (range * z) - (range / 2);
