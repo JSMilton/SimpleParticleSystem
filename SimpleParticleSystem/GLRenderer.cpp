@@ -9,6 +9,7 @@
 #include "GLRenderer.h"
 #include "SimpleParticleModel.h"
 #include "SimpleParticleShader.h"
+#include "SimpleParticleFeedbackShader.h"
 #include "ImageLoader.h"
 
 void GLRenderer::initOpenGL() {
@@ -19,6 +20,10 @@ void GLRenderer::initOpenGL() {
     
     mSimpleParticleModel = new SimpleParticleModel;
     mSimpleParticleShader = new SimpleParticleShader;
+    mSimpleParticleFeedbackShader = new SimpleParticleFeedbackShader;
+    
+    mParticleModelA = new SimpleParticleModel;
+    mParticleModelB = new SimpleParticleModel;
     
     lightPosition = glm::vec3(0.0,10.0,10.0);
     
@@ -32,7 +37,14 @@ void GLRenderer::initOpenGL() {
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA,
                  (GLint)myImage->mWidth, (GLint)myImage->mHeight, 0, GL_RGBA,
                  GL_UNSIGNED_BYTE, static_cast<const GLvoid*>(myImage->mImageData));
+    
+    emitterPosition = glm::vec3(0,0,0);
 
+    glEnable (GL_PROGRAM_POINT_SIZE);
+    glEnable (GL_BLEND);
+    glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    
+    mBuffer = 0;
     
     render(0.0);
 }
@@ -44,17 +56,37 @@ void GLRenderer::render(float dt) {
     
     freeGLBindings();
     
+    mSimpleParticleFeedbackShader->enable();
+    glUniform3fv(mSimpleParticleFeedbackShader->mEmitterPositionHandle, 1, glm::value_ptr(emitterPosition));
+    glUniform1f(mSimpleParticleFeedbackShader->mElapsedTimeHandle, timer += (GLfloat)dt);
+    
+    if (mBuffer == 0){
+        glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, mParticleModelA->mVBO);
+    } else {
+        glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, mParticleModelB->mVBO);
+    }
+    
+    glEnable(GL_RASTERIZER_DISCARD);
+    
+    // perform transform feedback
+    glBeginTransformFeedback(GL_POINTS);
+    if (mBuffer == 0){
+        mParticleModelB->drawArrays();
+    } else {
+       mParticleModelA->drawArrays();
+    }
+    glEndTransformFeedback();
+    
+    glDisable(GL_RASTERIZER_DISCARD);
+    
+    mSimpleParticleFeedbackShader->disable();
+    
     /* Render Particles. Enabling point re-sizing in vertex shader */
-    glEnable (GL_PROGRAM_POINT_SIZE);
-    glEnable (GL_BLEND);
-    glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    
     glClearColor(0, 0, 0, 1);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     mSimpleParticleShader->enable();
-    
     /* update time in shaders */
-    glUniform3f(mSimpleParticleShader->mEmitterPositionHandle, 0, 0, 0);
-    glUniform1f (mSimpleParticleShader->mElapsedTimeHandle, timer += (GLfloat)dt);
     glUniformMatrix4fv(mSimpleParticleShader->mProjectionMatrixHandle, 1, GL_FALSE, glm::value_ptr(mProjectionMatrix));
     glUniformMatrix4fv(mSimpleParticleShader->mViewMatrixHandle, 1, GL_FALSE, glm::value_ptr(mViewMatrix));
     glUniform3fv(mSimpleParticleShader->mLightPositionWorldHandle, 1, glm::value_ptr(lightPosition));
@@ -62,12 +94,17 @@ void GLRenderer::render(float dt) {
     glBindTexture(GL_TEXTURE_2D, mParticleTexture);
     glUniform1i(mSimpleParticleShader->mTextureHandle, 0);
     // draw points 0-3 from the currently bound VAO with current in-use shader
-    mSimpleParticleModel->drawArrays();
+    if (mBuffer == 0){
+        mParticleModelA->drawArrays();
+    } else {
+        mParticleModelB->drawArrays();
+    }
     mSimpleParticleShader->disable();
-    glDisable (GL_BLEND);
-    glDisable (GL_PROGRAM_POINT_SIZE);
     
     mPreviousViewMatrix = mViewMatrix;
+    
+    mBuffer++;
+    if (mBuffer > 1)mBuffer = 0;
 }
 
 void GLRenderer::reshape(int width, int height) {
@@ -106,10 +143,6 @@ void GLRenderer::leap_leftHandVelocity(float x, float y, float z) {
 
 // values are normalised
 void GLRenderer::leap_position(float x, float y, float z) {
-    float range = 20;
-    lightPosition.x = (range * x) - (range / 2);
-    lightPosition.y = (range * y) - (range / 2);
-    lightPosition.z = (range * z) - (range / 2);
 }
 
 void GLRenderer::freeGLBindings(void) const
@@ -123,10 +156,14 @@ void GLRenderer::freeGLBindings(void) const
 }
 
 void GLRenderer::moveLightSourceByNormalisedVector(float x, float y, float z) {
-    float range = 20;
-    lightPosition.x = (range * x) - (range / 2);
-    lightPosition.y = (range * y) - (range / 2);
-    lightPosition.z = (range * z) - (range / 2);
+    float range = 2;
+//    lightPosition.x = (range * x) - (range / 2);
+//    lightPosition.y = (range * y) - (range / 2);
+//    lightPosition.z = (range * z) - (range / 2);
+    
+    emitterPosition.x = (range * x) - (range / 2);
+    emitterPosition.y = (range * y) - (range / 2);
+    emitterPosition.z = (range * z) - (range / 2);
 }
 
 void GLRenderer::changeParticleVelocity(float velocity) {

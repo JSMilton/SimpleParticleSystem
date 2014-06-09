@@ -13,8 +13,6 @@ public:
     SimpleParticleShader();
     GLint mViewMatrixHandle;
     GLint mProjectionMatrixHandle;
-    GLint mEmitterPositionHandle;
-    GLint mElapsedTimeHandle;
     GLint mLightPositionWorldHandle;
     GLint mTextureHandle;
 };
