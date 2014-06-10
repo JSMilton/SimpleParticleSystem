@@ -24,6 +24,8 @@ void GLRenderer::initOpenGL() {
     
     mParticleModelA = new SimpleParticleModel;
     mParticleModelB = new SimpleParticleModel;
+    mParticleModelC = new SimpleParticleModel;
+    mParticleModelD = new SimpleParticleModel;
     
     lightPosition = glm::vec3(0.0,10.0,10.0);
     
@@ -38,7 +40,8 @@ void GLRenderer::initOpenGL() {
                  (GLint)myImage->mWidth, (GLint)myImage->mHeight, 0, GL_RGBA,
                  GL_UNSIGNED_BYTE, static_cast<const GLvoid*>(myImage->mImageData));
     
-    emitterPosition = glm::vec3(0,0,0);
+    emitterPosition = glm::vec3(0.5,0,0);
+    emitterPosition2 = glm::vec3(0.5,0.5,0);
 
     glEnable (GL_PROGRAM_POINT_SIZE);
     glEnable (GL_BLEND);
@@ -77,6 +80,21 @@ void GLRenderer::render(float dt) {
     }
     glEndTransformFeedback();
     
+    glUniform3fv(mSimpleParticleFeedbackShader->mEmitterPositionHandle, 1, glm::value_ptr(emitterPosition2));
+    if (mBuffer == 0){
+        glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, mParticleModelC->mVBO);
+    } else {
+        glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, mParticleModelD->mVBO);
+    }
+    glBeginTransformFeedback(GL_POINTS);
+    if (mBuffer == 0){
+        mParticleModelD->drawArrays();
+    } else {
+        mParticleModelC->drawArrays();
+    }
+    glEndTransformFeedback();
+
+    
     glDisable(GL_RASTERIZER_DISCARD);
     
     mSimpleParticleFeedbackShader->disable();
@@ -96,8 +114,10 @@ void GLRenderer::render(float dt) {
     // draw points 0-3 from the currently bound VAO with current in-use shader
     if (mBuffer == 0){
         mParticleModelA->drawArrays();
+        mParticleModelC->drawArrays();
     } else {
         mParticleModelB->drawArrays();
+        mParticleModelD->drawArrays();
     }
     mSimpleParticleShader->disable();
     
@@ -161,9 +181,18 @@ void GLRenderer::moveLightSourceByNormalisedVector(float x, float y, float z) {
 //    lightPosition.y = (range * y) - (range / 2);
 //    lightPosition.z = (range * z) - (range / 2);
     
-    emitterPosition.x = (range * x) - (range / 2);
-    emitterPosition.y = (range * y) - (range / 2);
-    emitterPosition.z = (range * z) - (range / 2);
+    emitterPosition = glm::rotateY(emitterPosition, x);
+    emitterPosition2.x = emitterPosition.x * -1;
+    emitterPosition2.y = emitterPosition.y * -1;
+    emitterPosition2.z = emitterPosition.z * -1;
+    
+//    emitterPosition.x = (range * x) - (range / 2);
+//    emitterPosition.y = (range * y) - (range / 2);
+//    emitterPosition.z = (range * z) - (range / 2);
+//    
+//    emitterPosition2.x = ((range * x) - (range / 2)) * -1;
+//    emitterPosition2.y = ((range * y) - (range / 2));
+//    emitterPosition2.z = ((range * z) - (range / 2));
 }
 
 void GLRenderer::changeParticleVelocity(float velocity) {

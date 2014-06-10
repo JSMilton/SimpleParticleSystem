@@ -9,6 +9,7 @@
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 #include "glm/gtc/type_ptr.hpp"
+#include "glm/gtx/rotate_vector.hpp"
 #include "glUtil.h"
 
 class SimpleParticleModel;
@@ -48,12 +49,15 @@ private:
     
     SimpleParticleModel *mParticleModelA;
     SimpleParticleModel *mParticleModelB;
+    SimpleParticleModel *mParticleModelC;
+    SimpleParticleModel *mParticleModelD;
     
     GLuint mParticleTexture;
     
     float timer;
     glm::vec3 lightPosition;
     glm::vec3 emitterPosition;
+    glm::vec3 emitterPosition2;
     
     int mBuffer;
 };
