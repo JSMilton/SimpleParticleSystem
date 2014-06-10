@@ -59,5 +59,7 @@ private:
     glm::vec3 emitterPosition;
     glm::vec3 emitterPosition2;
     
+    float mParticleRotationVelocity;
+    
     int mBuffer;
 };

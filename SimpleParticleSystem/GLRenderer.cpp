@@ -123,8 +123,15 @@ void GLRenderer::render(float dt) {
     
     mPreviousViewMatrix = mViewMatrix;
     
+    emitterPosition = glm::rotateY(emitterPosition, mParticleRotationVelocity);
+    emitterPosition2.x = emitterPosition.x * -1;
+    emitterPosition2.y = emitterPosition.y * -1;
+    emitterPosition2.z = emitterPosition.z * -1;
+    
     mBuffer++;
     if (mBuffer > 1)mBuffer = 0;
+    
+    mParticleRotationVelocity *= 0.99;
 }
 
 void GLRenderer::reshape(int width, int height) {
@@ -181,10 +188,10 @@ void GLRenderer::moveLightSourceByNormalisedVector(float x, float y, float z) {
 //    lightPosition.y = (range * y) - (range / 2);
 //    lightPosition.z = (range * z) - (range / 2);
     
-    emitterPosition = glm::rotateY(emitterPosition, x);
-    emitterPosition2.x = emitterPosition.x * -1;
-    emitterPosition2.y = emitterPosition.y * -1;
-    emitterPosition2.z = emitterPosition.z * -1;
+//    emitterPosition = glm::rotateY(emitterPosition, x);
+//    emitterPosition2.x = emitterPosition.x * -1;
+//    emitterPosition2.y = emitterPosition.y * -1;
+//    emitterPosition2.z = emitterPosition.z * -1;
     
 //    emitterPosition.x = (range * x) - (range / 2);
 //    emitterPosition.y = (range * y) - (range / 2);
@@ -196,7 +203,12 @@ void GLRenderer::moveLightSourceByNormalisedVector(float x, float y, float z) {
 }
 
 void GLRenderer::changeParticleVelocity(float velocity) {
-    timer += velocity / velMod;
+    //timer += velocity / velMod;
+    mParticleRotationVelocity += velocity / 5000;
+//    emitterPosition = glm::rotateY(emitterPosition, velocity/10);
+//    emitterPosition2.x = emitterPosition.x * -1;
+//    emitterPosition2.y = emitterPosition.y * -1;
+//    emitterPosition2.z = emitterPosition.z * -1;
 }
 
 void GLRenderer::resetFramebuffers() {
