@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		43289F5019488043003CF0BC /* ObjModelLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43289F4F19488043003CF0BC /* ObjModelLoader.cpp */; };
+		43289F5319489E96003CF0BC /* cross.obj in Resources */ = {isa = PBXBuildFile; fileRef = 43289F5219489E96003CF0BC /* cross.obj */; };
+		43289F551948A623003CF0BC /* cross.txt in Resources */ = {isa = PBXBuildFile; fileRef = 43289F541948A623003CF0BC /* cross.txt */; };
 		43A428D81940C8F300605DAE /* LeapObjectiveC.mm in Sources */ = {isa = PBXBuildFile; fileRef = 43A428D71940C8F300605DAE /* LeapObjectiveC.mm */; };
 		43A428DA1940CA2200605DAE /* libLeap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 43A428D91940CA2200605DAE /* libLeap.dylib */; };
 		43A428DB1940CA3C00605DAE /* libLeap.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 43A428D91940CA2200605DAE /* libLeap.dylib */; };
@@ -177,6 +179,8 @@
 /* Begin PBXFileReference section */
 		43289F4F19488043003CF0BC /* ObjModelLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ObjModelLoader.cpp; sourceTree = "<group>"; };
 		43289F511948804F003CF0BC /* ObjModelLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjModelLoader.h; sourceTree = "<group>"; };
+		43289F5219489E96003CF0BC /* cross.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cross.obj; sourceTree = "<group>"; };
+		43289F541948A623003CF0BC /* cross.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cross.txt; sourceTree = "<group>"; };
 		43A428D41940C8F300605DAE /* Leap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Leap.h; sourceTree = "<group>"; };
 		43A428D51940C8F300605DAE /* LeapMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeapMath.h; sourceTree = "<group>"; };
 		43A428D61940C8F300605DAE /* LeapObjectiveC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeapObjectiveC.h; sourceTree = "<group>"; };
@@ -574,6 +578,8 @@
 		43D4CF5A193F45C9004DCABB /* SimpleParticleSystem */ = {
 			isa = PBXGroup;
 			children = (
+				43289F541948A623003CF0BC /* cross.txt */,
+				43289F5219489E96003CF0BC /* cross.obj */,
 				43CD1FB31940A7CB007E996B /* Droplet.png */,
 				43D4D726193F4E37004DCABB /* glUtil.h */,
 				43CD1FAA19409CFE007E996B /* imageUtil.m */,
@@ -1175,6 +1181,7 @@
 				43D4D723193F4E14004DCABB /* vector_angle.inl in Resources */,
 				43D4D6CD193F4E14004DCABB /* intrinsic_vector_relational.inl in Resources */,
 				43D4D6E4193F4E14004DCABB /* matrix_transform.inl in Resources */,
+				43289F5319489E96003CF0BC /* cross.obj in Resources */,
 				43D4D715193F4E14004DCABB /* raw_data.inl in Resources */,
 				43D4D6F9193F4E14004DCABB /* fast_square_root.inl in Resources */,
 				43D4D6E3193F4E14004DCABB /* matrix_inverse.inl in Resources */,
@@ -1182,6 +1189,7 @@
 				43D4D6F8193F4E14004DCABB /* fast_exponential.inl in Resources */,
 				43D4D716193F4E14004DCABB /* rotate_normalized_axis.inl in Resources */,
 				43D4D6C7193F4E14004DCABB /* intrinsic_common.inl in Resources */,
+				43289F551948A623003CF0BC /* cross.txt in Resources */,
 				43D4D6BB193F4E14004DCABB /* CMakeLists.txt in Resources */,
 				43D4D706193F4E14004DCABB /* matrix_operation.inl in Resources */,
 				43D4D6F2193F4E14004DCABB /* compatibility.inl in Resources */,

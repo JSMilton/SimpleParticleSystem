@@ -11,6 +11,7 @@
 #include "SimpleParticleShader.h"
 #include "SimpleParticleFeedbackShader.h"
 #include "ImageLoader.h"
+#include "ObjModelLoader.h"
 
 void GLRenderer::initOpenGL() {
     glClearColor(0.f, 0.f, 0.f, 1.0f);
@@ -44,13 +45,15 @@ void GLRenderer::initOpenGL() {
     delete myImage;
     
     emitterPosition = glm::vec3(0.5,0,0);
-    emitterPosition2 = glm::vec3(0.5,0.5,0);
+    emitterPosition2 = glm::vec3(-0.5,0,0);
     
     mBuffer = 0;
     
     glEnable (GL_PROGRAM_POINT_SIZE);
     glEnable (GL_BLEND);
     glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    
+    ObjModelLoader *myObj = new ObjModelLoader("cross");
     
     render(0.0);
 }
@@ -83,19 +86,19 @@ void GLRenderer::render(float dt) {
     }
     glEndTransformFeedback();
     
-//    glUniform3fv(mSimpleParticleFeedbackShader->mEmitterPositionHandle, 1, glm::value_ptr(emitterPosition2));
-//    if (mBuffer == 0){
-//        glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, mParticleModelC->mVBO);
-//    } else {
-//        glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, mParticleModelD->mVBO);
-//    }
-//    glBeginTransformFeedback(GL_POINTS);
-//    if (mBuffer == 0){
-//        mParticleModelD->drawArrays();
-//    } else {
-//        mParticleModelC->drawArrays();
-//    }
-//    glEndTransformFeedback();
+    glUniform3fv(mSimpleParticleFeedbackShader->mEmitterPositionHandle, 1, glm::value_ptr(emitterPosition2));
+    if (mBuffer == 0){
+        glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, mParticleModelC->mVBO);
+    } else {
+        glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, mParticleModelD->mVBO);
+    }
+    glBeginTransformFeedback(GL_POINTS);
+    if (mBuffer == 0){
+        mParticleModelD->drawArrays();
+    } else {
+        mParticleModelC->drawArrays();
+    }
+    glEndTransformFeedback();
 
     
     glDisable(GL_RASTERIZER_DISCARD);
@@ -117,10 +120,10 @@ void GLRenderer::render(float dt) {
     // draw points 0-3 from the currently bound VAO with current in-use shader
     if (mBuffer == 0){
         mParticleModelA->drawArrays();
-       // mParticleModelC->drawArrays();
+        mParticleModelC->drawArrays();
     } else {
         mParticleModelB->drawArrays();
-       // mParticleModelD->drawArrays();
+        mParticleModelD->drawArrays();
     }
     mSimpleParticleShader->disable();
     
@@ -187,27 +190,14 @@ void GLRenderer::freeGLBindings(void) const
 
 void GLRenderer::moveLightSourceByNormalisedVector(float x, float y, float z) {
     float range = 2;
-//    lightPosition.x = (range * x) - (range / 2);
-//    lightPosition.y = (range * y) - (range / 2);
-//    lightPosition.z = (range * z) - (range / 2);
-    
-//    emitterPosition = glm::rotateY(emitterPosition, x);
-//    emitterPosition2.x = emitterPosition.x * -1;
-//    emitterPosition2.y = emitterPosition.y * -1;
-//    emitterPosition2.z = emitterPosition.z * -1;
-    
-//    emitterPosition.x = (range * x) - (range / 2);
-//    emitterPosition.y = (range * y) - (range / 2);
-//    emitterPosition.z = (range * z) - (range / 2);
-//    
-//    emitterPosition2.x = ((range * x) - (range / 2)) * -1;
-//    emitterPosition2.y = ((range * y) - (range / 2));
-//    emitterPosition2.z = ((range * z) - (range / 2));
+    lightPosition.x = (range * x) - (range / 2);
+    lightPosition.y = (range * y) - (range / 2);
+    lightPosition.z = (range * z) - (range / 2);
 }
 
 void GLRenderer::changeParticleVelocity(float velocity) {
     //timer += velocity / velMod;
-    mParticleRotationVelocity += velocity / 5000;
+    mParticleRotationVelocity += velocity / 3000;
 //    emitterPosition = glm::rotateY(emitterPosition, velocity/10);
 //    emitterPosition2.x = emitterPosition.x * -1;
 //    emitterPosition2.y = emitterPosition.y * -1;

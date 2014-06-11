@@ -29,7 +29,7 @@ void main () {
     vec3 normal_eye = vec3(vViewMatrix * vec4(normalcoord, 1, 0)).xyz;
     
     vec3 EyeDirection_eye = vec3(0,0,0) - vPosition_eye;
-    vec3 light_position_eye = vec3(vViewMatrix * vec4(light_position_world, 1.0)).xyz;
+    vec3 light_position_eye = vec3(vViewMatrix * vec4(uLightPositionWorld, 1.0)).xyz;
     vec3 light_direction_eye = light_position_eye + EyeDirection_eye;
     vec3 light_distance_eye = light_position_eye.xyz - vPosition_eye.xyz;
     float LD = dot(light_distance_eye, light_distance_eye);
