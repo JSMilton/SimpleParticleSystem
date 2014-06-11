@@ -48,6 +48,5 @@ void main () {
     vec3 Is = Ls * Ks * light_power * pow(cosAlpha, 5) / LD; // final specular intensity
     
     // final colour
-    outFragColor = texture(tex, texcoord) * vec4(Is + Id + Ia, 1);
-    outFragColor.a = vOpacity;
+    outFragColor = (texture(tex, texcoord) * vec4(Is + Id + Ia, 1)) * vOpacity;
 }
