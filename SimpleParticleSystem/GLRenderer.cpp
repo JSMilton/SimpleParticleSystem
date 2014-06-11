@@ -40,14 +40,17 @@ void GLRenderer::initOpenGL() {
                  (GLint)myImage->mWidth, (GLint)myImage->mHeight, 0, GL_RGBA,
                  GL_UNSIGNED_BYTE, static_cast<const GLvoid*>(myImage->mImageData));
     
+    myImage->~ImageLoader();
+    delete myImage;
+    
     emitterPosition = glm::vec3(0.5,0,0);
     emitterPosition2 = glm::vec3(0.5,0.5,0);
-
+    
+    mBuffer = 0;
+    
     glEnable (GL_PROGRAM_POINT_SIZE);
     glEnable (GL_BLEND);
     glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    
-    mBuffer = 0;
     
     render(0.0);
 }
@@ -80,19 +83,19 @@ void GLRenderer::render(float dt) {
     }
     glEndTransformFeedback();
     
-    glUniform3fv(mSimpleParticleFeedbackShader->mEmitterPositionHandle, 1, glm::value_ptr(emitterPosition2));
-    if (mBuffer == 0){
-        glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, mParticleModelC->mVBO);
-    } else {
-        glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, mParticleModelD->mVBO);
-    }
-    glBeginTransformFeedback(GL_POINTS);
-    if (mBuffer == 0){
-        mParticleModelD->drawArrays();
-    } else {
-        mParticleModelC->drawArrays();
-    }
-    glEndTransformFeedback();
+//    glUniform3fv(mSimpleParticleFeedbackShader->mEmitterPositionHandle, 1, glm::value_ptr(emitterPosition2));
+//    if (mBuffer == 0){
+//        glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, mParticleModelC->mVBO);
+//    } else {
+//        glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, mParticleModelD->mVBO);
+//    }
+//    glBeginTransformFeedback(GL_POINTS);
+//    if (mBuffer == 0){
+//        mParticleModelD->drawArrays();
+//    } else {
+//        mParticleModelC->drawArrays();
+//    }
+//    glEndTransformFeedback();
 
     
     glDisable(GL_RASTERIZER_DISCARD);
@@ -101,7 +104,7 @@ void GLRenderer::render(float dt) {
     
     /* Render Particles. Enabling point re-sizing in vertex shader */
     
-    glClearColor(0, 0, 0, 1);
+    glClearColor(0, 0, 0, 0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     mSimpleParticleShader->enable();
     /* update time in shaders */
@@ -114,10 +117,10 @@ void GLRenderer::render(float dt) {
     // draw points 0-3 from the currently bound VAO with current in-use shader
     if (mBuffer == 0){
         mParticleModelA->drawArrays();
-        mParticleModelC->drawArrays();
+       // mParticleModelC->drawArrays();
     } else {
         mParticleModelB->drawArrays();
-        mParticleModelD->drawArrays();
+       // mParticleModelD->drawArrays();
     }
     mSimpleParticleShader->disable();
     

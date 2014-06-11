@@ -41,7 +41,7 @@ ScreenQuadModel::ScreenQuadModel() : BaseModel() {
     mTextureUV = (GLubyte *)malloc(mTexureUVArraySize);
     memcpy(mTextureUV, textureUVArray, mTexureUVArraySize);
     
-    mPrimType = GL_TRIANGLES;
+    mPrimitiveType = GL_TRIANGLES;
     
-    mNumVertcies = vertexCount;
+    mNumVertices = vertexCount;
 }

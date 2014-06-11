@@ -42,8 +42,9 @@ ImageLoader::ImageLoader(const char* imageName) {
 	CGContextDrawImage(context, CGRectMake(0.0, 0.0, mWidth, mHeight), image);
 	CGContextRelease(context);
     CGImageRelease(image);
+    CFRelease(data);
 }
 
 ImageLoader::~ImageLoader() {
-    free(mImageData);
+   // free(mImageData);
 }

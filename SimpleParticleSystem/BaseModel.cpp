@@ -8,13 +8,11 @@
 
 #include "BaseModel.h"
 
-BaseModel::BaseModel() {
+BaseModel::BaseModel() : BaseDrawableObject() {
     mTranslationMatrix = glm::mat4(1.0);
     mScaleMatrix = glm::mat4(1.0);
     mRotationMatrix = glm::mat4(1.0);
-    mVAO = 0;
     
-    mNumVertcies = 0;
     mPositions = NULL;
     mPositionType = 0;
     mPositionSize = 0;
@@ -34,13 +32,6 @@ BaseModel::BaseModel() {
     mTextureType = 0;
     mTextureSize = 0;
     mTexureUVArraySize = 0;
-    
-    mElements = NULL;
-    mElementType = 0;
-    mNumElements = 0;
-    mElementArraySize = 0;
-    
-    mPrimType = GL_TRIANGLES;
 }
 
 BaseModel::~BaseModel() {
@@ -49,18 +40,6 @@ BaseModel::~BaseModel() {
     free(mPositions);
     free(mNormals);
     free(mTextureUV);
-}
-
-void BaseModel::drawElements() {
-    glBindVertexArray(mVAO);
-    glDrawElements(mPrimType, mNumElements, mElementType, 0);
-    glBindVertexArray(0);
-}
-
-void BaseModel::drawArrays() {
-    glBindVertexArray(mVAO);
-    glDrawArrays(mPrimType, 0, mNumVertcies);
-    glBindVertexArray(0);
 }
 
 void BaseModel::buildVAO() {

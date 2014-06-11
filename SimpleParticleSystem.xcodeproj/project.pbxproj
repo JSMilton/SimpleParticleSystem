@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		43289F5019488043003CF0BC /* ObjModelLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43289F4F19488043003CF0BC /* ObjModelLoader.cpp */; };
 		43A428D81940C8F300605DAE /* LeapObjectiveC.mm in Sources */ = {isa = PBXBuildFile; fileRef = 43A428D71940C8F300605DAE /* LeapObjectiveC.mm */; };
 		43A428DA1940CA2200605DAE /* libLeap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 43A428D91940CA2200605DAE /* libLeap.dylib */; };
 		43A428DB1940CA3C00605DAE /* libLeap.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 43A428D91940CA2200605DAE /* libLeap.dylib */; };
@@ -174,6 +175,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		43289F4F19488043003CF0BC /* ObjModelLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ObjModelLoader.cpp; sourceTree = "<group>"; };
+		43289F511948804F003CF0BC /* ObjModelLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjModelLoader.h; sourceTree = "<group>"; };
 		43A428D41940C8F300605DAE /* Leap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Leap.h; sourceTree = "<group>"; };
 		43A428D51940C8F300605DAE /* LeapMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeapMath.h; sourceTree = "<group>"; };
 		43A428D61940C8F300605DAE /* LeapObjectiveC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeapObjectiveC.h; sourceTree = "<group>"; };
@@ -519,6 +522,8 @@
 			children = (
 				43CD1FAF19409D20007E996B /* ImageLoader.h */,
 				43CD1FAE19409D20007E996B /* ImageLoader.cpp */,
+				43289F511948804F003CF0BC /* ObjModelLoader.h */,
+				43289F4F19488043003CF0BC /* ObjModelLoader.cpp */,
 			);
 			name = "Utility Classes";
 			sourceTree = "<group>";
@@ -1207,6 +1212,7 @@
 				43D4D59D193F48DB004DCABB /* BaseShader.cpp in Sources */,
 				43D4D596193F4890004DCABB /* GLRenderer.cpp in Sources */,
 				43D4D5A4193F48F1004DCABB /* ScreenQuadModel.cpp in Sources */,
+				43289F5019488043003CF0BC /* ObjModelLoader.cpp in Sources */,
 				43D4D729193F6A29004DCABB /* SimpleParticleShader.cpp in Sources */,
 				43D4D730193F6E4A004DCABB /* SimpleParticleModel.cpp in Sources */,
 				43E569C81941E8DF00FBA3A5 /* SimpleParticleFeedbackShader.cpp in Sources */,

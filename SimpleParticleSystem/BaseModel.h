@@ -9,7 +9,7 @@
 #ifndef BASE_MODEL_H
 #define BASE_MODEL_H
 
-#include "glUtil.h"
+#include "BaseDrawableObject.h"
 #include <string.h>
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
@@ -22,26 +22,20 @@ enum {
     COLOR_ATTRIB_IDX
 };
 
-class BaseModel {
+class BaseModel : public BaseDrawableObject {
 public:
     BaseModel();
     ~BaseModel();
+    void loadObjectFile(const char* objFile);
     void buildVAO();
-    void drawElements();
-    void drawArrays();
     void translateModelByVector3(float x, float y, float z);
     void rotateModelByVector3AndAngle(float x, float y, float z, float angle);
     void scaleModelByVector3(float x, float y, float z);
     glm::mat4 getPreviousModelMatrix();
     glm::mat4 getModelMatrix();
     
-private:
-    GLuint mVAO;
-    
 protected:
     glm::mat4 createModelMatrix();
-    
-    GLuint mNumVertcies;
 	
 	GLubyte *mPositions;
 	GLenum mPositionType;
@@ -62,13 +56,6 @@ protected:
 	GLenum mTextureType;
 	GLuint mTextureSize;
 	GLsizei mTexureUVArraySize;
-    
-	GLubyte *mElements;
-	GLenum mElementType;
-	GLuint mNumElements;
-	GLsizei mElementArraySize;
-    
-	GLenum mPrimType;
     
     glm::mat4 mRotationMatrix;
     glm::mat4 mScaleMatrix;
