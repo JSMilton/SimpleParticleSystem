@@ -16,9 +16,15 @@ typedef struct {
 } vector;
 
 typedef struct {
-    vector xVec;
-    vector yVec;
-    vector zVec;
+    int x;
+    int y;
+    int z;
+} iVector;
+
+typedef struct {
+    iVector xVec;
+    iVector yVec;
+    iVector zVec;
 } element;
 
 
@@ -44,57 +50,37 @@ char* getSubstringUpToDelimiter(int startIndex, const char *substr, char delimit
 
 vector getVectorFromSubstring(char *substr, const char* delimiter){
     vector vVector;
-    vVector.x = strtof(strtok(substr, delimiter), NULL);
-    vVector.y = strtof(strtok(NULL, delimiter), NULL);
-    vVector.z = strtof(strtok(NULL, delimiter), NULL);
+    
+    const char *x = strtok(substr, delimiter);
+    if (x == NULL)x = "0";
+    const char *y = strtok(NULL, delimiter);
+    if (y == NULL)y = "0";
+    const char *z = strtok(NULL, delimiter);
+    if (z == NULL)z = "0";
+
+    vVector.x = strtof(x, NULL);
+    vVector.y = strtof(y, NULL);
+    vVector.z = strtof(z, NULL);
     return vVector;
 }
 
-element getElementFromSubstring(char *substr, const char* delimiter){
-    element eElement;
+iVector getIVectorFromSubstring(char *substr, const char* delimiter){
+    iVector vVector;
     
-    char *xStr = strtok(substr, " ");
-    char *yStr = strtok(NULL, " ");
-    char *zStr = strtok(NULL, " ");
-    
-    const char *x = strtok(xStr, "/");
-    const char *y;
-    if (strchr(x, '/') != NULL)y = strtok(NULL, "/");
-    else y = "0";
-    const char *z = strtok(NULL, "/");
+    const char *x = strtok(substr, delimiter);
+    if (x == NULL)x = "0";
+    const char *y = strtok(NULL, delimiter);
+    if (y == NULL)y = "0";
+    const char *z = strtok(NULL, delimiter);
     if (z == NULL)z = "0";
-    
-    eElement.xVec.x = strtol(x, NULL, 10);
-    eElement.xVec.y = strtol(y, NULL, 10);
-    eElement.xVec.z = strtol(z, NULL, 10);
     
     printf("%s %s %s\n", x,y,z);
     
-    x = strtok(yStr, "/");
-    if (strchr(x, '/') != NULL)y = strtok(NULL, "/");
-    else y = "0";
-    z = strtok(NULL, "/");
-    if (z == NULL)z = "0";
+    vVector.x = (int)strtol(x, NULL, 10);
+    vVector.y = (int)strtol(y, NULL, 10);
+    vVector.z = (int)strtol(z, NULL, 10);
     
-    eElement.yVec.x = strtol(x, NULL, 10);
-    eElement.yVec.y = strtol(y, NULL, 10);
-    eElement.yVec.z = strtol(z, NULL, 10);
-    
-    printf("%s %s %s\n", x,y,z);
-
-    x = strtok(zStr, "/");
-    if (strchr(x, '/') != NULL)y = strtok(NULL, "/");
-    else y = "0";
-    z = strtok(NULL, "/");
-    if (z == NULL)z = "0";
-    
-    eElement.zVec.x = strtol(x, NULL, 10);
-    eElement.zVec.y = strtol(y, NULL, 10);
-    eElement.zVec.z = strtol(z, NULL, 10);
-    
-    printf("%s %s %s\n", x,y,z);
-    
-    return eElement;
+    return vVector;
 }
 
 ObjModelLoader::ObjModelLoader(const char* objFileName) {
@@ -119,7 +105,6 @@ ObjModelLoader::ObjModelLoader(const char* objFileName) {
     if (curFile){
         fseek(curFile, 0, SEEK_END);
         size_t fileSize = ftell(curFile);
-        printf("%lu is file size\n", fileSize);
         buffer = (char*)malloc(fileSize);
         fseek(curFile, 0, SEEK_SET);
         fread(buffer, 1, fileSize, curFile);
@@ -156,11 +141,13 @@ ObjModelLoader::ObjModelLoader(const char* objFileName) {
             
             if (c == 'f' && cc == ' '){
                 printf("%c\n", c);
-                elementCount++;
+                elementCount+=3; // each face has 3 vertices
             }
         }
         
         mPositions = (GLfloat*)malloc((sizeof(GL_FLOAT) * 3) * vertexCount);
+        mNormals = (GLfloat*)malloc((sizeof(GL_FLOAT) * 3) * vertexCount);
+        mElements = (GLuint*)malloc(sizeof(GLuint) * elementCount);
         float faceNormals[normalCount * 3];
         int vIndex = 0;
         int nIndex = 0;
@@ -178,6 +165,7 @@ ObjModelLoader::ObjModelLoader(const char* objFileName) {
                 vIndex++;
                 mPositions[vIndex] = vVector.z;
                 vIndex++;
+                free(substr);
             }
             
             if (c == 'v' && cc == 'n'){
@@ -189,22 +177,60 @@ ObjModelLoader::ObjModelLoader(const char* objFileName) {
                 nIndex++;
                 faceNormals[nIndex] = vVector.z;
                 nIndex++;
+                free(substr);
             }
             
             if (c == 'f' && cc == ' '){
                 char *substr = getSubstringUpToDelimiter(i+2, buffer, 10);
                 printf("%s\n", substr);
-                element eElement = getElementFromSubstring(substr, " ");
+                
+                element eElement;
+                
+                char *xStr = strtok(substr, " ");
+                char *yStr = strtok(NULL, " ");
+                char *zStr = strtok(NULL, " ");
+                
+                eElement.xVec = getIVectorFromSubstring(xStr, "/");
+                eElement.yVec = getIVectorFromSubstring(yStr, "/");
+                eElement.zVec = getIVectorFromSubstring(zStr, "/");
+                
+                mElements[eIndex] = eElement.xVec.x;
+                eIndex++;
+                mElements[eIndex] = eElement.yVec.x;
+                eIndex++;
+                mElements[eIndex] = eElement.zVec.x;
+                eIndex++;
+                
+                free(substr);
             }
         }
         
+//        if (hasNormals){
+//            for (int i = 0; i < vertexCount * 3; i+=3){
+//                if (!hasTextures){
+//                    mNormals[i] = eElement.xVec.y;
+//                    mNormals[i + 1] = eElement.yVec.y;
+//                    mNormals[i + 2] = eElement.zVec.y;
+//                } else {
+//                    mNormals[i] = eElement.xVec.z;
+//                    mNormals[i + 1] = eElement.yVec.z;
+//                    mNormals[i + 2] = eElement.zVec.z;
+//                }
+//            }
+//        }
+        
         printf("vertices: %i\nnormals:%i\nelements:%i\n", vertexCount, normalCount, elementCount);
         
-        for (int i = 0; i < vertexCount * 3; i++){
-            printf("%f\n", mPositions[i]);
+        for (int i = 0; i < vertexCount * 3; i+=3){
+            printf("%f %f %f\n", mPositions[i], mPositions[i + 1], mPositions[i + 2]);
+            printf("%f %f %f\n", mNormals[i], mNormals[i + 1], mNormals[i + 2]);
         }
         for (int i = 0; i < normalCount * 3; i++){
             printf("%f\n", faceNormals[i]);
+        }
+        
+        for (int i = 0; i < elementCount; i++){
+            printf("%i\n", mElements[i]);
         }
         
     } else {

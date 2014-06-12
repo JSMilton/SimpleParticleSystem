@@ -30,7 +30,7 @@ public:
     GLuint mColorSize;
     GLsizei mColorArraySize;
     
-    GLubyte *mNormals;
+    GLfloat *mNormals;
     GLenum mNormalType;
     GLuint mNormalSize;
     GLsizei mNormalArraySize;
@@ -40,7 +40,7 @@ public:
     GLuint mTextureSize;
     GLsizei mTexureUVArraySize;
     
-    GLubyte *mElements;
+    GLuint *mElements;
     GLenum mElementType;
     GLuint mNumElements;
     GLsizei mElementArraySize;
