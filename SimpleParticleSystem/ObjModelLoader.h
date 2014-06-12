@@ -10,9 +10,8 @@
 #define __SimpleParticleSystem__ObjModelLoader__
 
 #include <iostream>
-#include <fstream>
-#include <string>
-#include <sstream>
+#include <string.h>
+#include <stdlib.h>
 
 #include "glUtil.h"
 
@@ -21,7 +20,7 @@ public:
     ObjModelLoader(const char* objFileName);
     ~ObjModelLoader();
     
-    GLubyte *mPositions;
+    GLfloat *mPositions;
     GLenum mPositionType;
     GLuint mPositionSize;
     GLsizei mPositionArraySize;
@@ -40,6 +39,11 @@ public:
     GLenum mTextureType;
     GLuint mTextureSize;
     GLsizei mTexureUVArraySize;
+    
+    GLubyte *mElements;
+    GLenum mElementType;
+    GLuint mNumElements;
+    GLsizei mElementArraySize;
 };
 
 #endif /* defined(__SimpleParticleSystem__ObjModelLoader__) */
