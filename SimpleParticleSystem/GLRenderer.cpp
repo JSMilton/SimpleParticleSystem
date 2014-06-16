@@ -53,7 +53,7 @@ void GLRenderer::initOpenGL() {
     glEnable (GL_BLEND);
     glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     
-    ObjModelLoader *myObj = new ObjModelLoader("cross");
+    ObjModelLoader *myObj = new ObjModelLoader("cross", false);
     
     render(0.0);
 }

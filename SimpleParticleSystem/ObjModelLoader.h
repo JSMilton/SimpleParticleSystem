@@ -17,7 +17,7 @@
 
 class ObjModelLoader {
 public:
-    ObjModelLoader(const char* objFileName);
+    ObjModelLoader(const char* objFileName, bool indexed);
     ~ObjModelLoader();
     
     GLfloat *mPositions;
@@ -35,7 +35,7 @@ public:
     GLuint mNormalSize;
     GLsizei mNormalArraySize;
     
-    GLubyte *mTextureUV;
+    GLfloat *mTextureUV;
     GLenum mTextureType;
     GLuint mTextureSize;
     GLsizei mTexureUVArraySize;

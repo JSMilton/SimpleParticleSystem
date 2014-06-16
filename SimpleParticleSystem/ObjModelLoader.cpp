@@ -83,7 +83,7 @@ iVector getIVectorFromSubstring(char *substr, const char* delimiter){
     return vVector;
 }
 
-ObjModelLoader::ObjModelLoader(const char* objFileName) {
+ObjModelLoader::ObjModelLoader(const char* objFileName, bool indexed) {
     
     CFStringRef name;
     CFMutableStringRef filePath;
@@ -122,33 +122,28 @@ ObjModelLoader::ObjModelLoader(const char* objFileName) {
             char c = buffer[i];
             char cc = buffer[i+1];
             if (c == 'v' && cc == ' '){
-                printf("%c\n", c);
                 vertexCount++;
                 hasPositions = 1;
             }
             
             if (c == 'v' && cc == 'n'){
-                printf("%c%c\n", c, cc);
                 normalCount++;
                 hasNormals = 1;
             }
             
             if (c == 'v' && cc == 't'){
-                printf("%c%cc\n", c, cc);
                 textureCount++;
                 hasTextures = 1;
             }
             
             if (c == 'f' && cc == ' '){
-                printf("%c\n", c);
-                elementCount+=3; // each face has 3 vertices
+                elementCount++;
             }
         }
         
-        mPositions = (GLfloat*)malloc((sizeof(GL_FLOAT) * 3) * vertexCount);
-        mNormals = (GLfloat*)malloc((sizeof(GL_FLOAT) * 3) * vertexCount);
-        mElements = (GLuint*)malloc(sizeof(GLuint) * elementCount);
-        float faceNormals[normalCount * 3];
+        vector vertices[vertexCount];
+        vector normals[normalCount];
+        element elements[elementCount];
         int vIndex = 0;
         int nIndex = 0;
         int eIndex = 0;
@@ -159,78 +154,92 @@ ObjModelLoader::ObjModelLoader(const char* objFileName) {
             if (c == 'v' && cc == ' '){
                 char *substr = getSubstringUpToDelimiter(i+2, buffer, 10);
                 vector vVector = getVectorFromSubstring(substr, " ");
-                mPositions[vIndex] = vVector.x;
+                vertices[vIndex] = vVector;
                 vIndex++;
-                mPositions[vIndex] = vVector.y;
-                vIndex++;
-                mPositions[vIndex] = vVector.z;
-                vIndex++;
+                printf("vertex: %f, %f, %f\n", vVector.x, vVector.y, vVector.z);
                 free(substr);
             }
             
             if (c == 'v' && cc == 'n'){
                 char *substr = getSubstringUpToDelimiter(i+2, buffer, 10);
                 vector vVector = getVectorFromSubstring(substr, " ");
-                faceNormals[nIndex] = vVector.x;
-                nIndex++;
-                faceNormals[nIndex] = vVector.y;
-                nIndex++;
-                faceNormals[nIndex] = vVector.z;
+                normals[nIndex] = vVector;
                 nIndex++;
                 free(substr);
             }
             
             if (c == 'f' && cc == ' '){
                 char *substr = getSubstringUpToDelimiter(i+2, buffer, 10);
-                printf("%s\n", substr);
-                
-                element eElement;
-                
                 char *xStr = strtok(substr, " ");
                 char *yStr = strtok(NULL, " ");
                 char *zStr = strtok(NULL, " ");
                 
-                eElement.xVec = getIVectorFromSubstring(xStr, "/");
-                eElement.yVec = getIVectorFromSubstring(yStr, "/");
-                eElement.zVec = getIVectorFromSubstring(zStr, "/");
-                
-                mElements[eIndex] = eElement.xVec.x;
+                elements[eIndex].xVec = getIVectorFromSubstring(xStr, "/");
+                elements[eIndex].yVec = getIVectorFromSubstring(yStr, "/");
+                elements[eIndex].zVec = getIVectorFromSubstring(zStr, "/");
                 eIndex++;
-                mElements[eIndex] = eElement.yVec.x;
-                eIndex++;
-                mElements[eIndex] = eElement.zVec.x;
-                eIndex++;
-                
                 free(substr);
             }
         }
         
-//        if (hasNormals){
-//            for (int i = 0; i < vertexCount * 3; i+=3){
-//                if (!hasTextures){
-//                    mNormals[i] = eElement.xVec.y;
-//                    mNormals[i + 1] = eElement.yVec.y;
-//                    mNormals[i + 2] = eElement.zVec.y;
-//                } else {
-//                    mNormals[i] = eElement.xVec.z;
-//                    mNormals[i + 1] = eElement.yVec.z;
-//                    mNormals[i + 2] = eElement.zVec.z;
-//                }
-//            }
-//        }
+        if (indexed){
+            
+        } else {
+            
+            GLsizei vertexArraySize = sizeof(vector) * elementCount * 3;
+            
+            mPositions = (GLfloat*)malloc(vertexArraySize);
+            mPositionArraySize = vertexArraySize;
+            mPositionSize = 3;
+            mPositionType = GL_FLOAT;
+            if (hasNormals){
+                mNormals = (GLfloat*)malloc(vertexArraySize);
+                mNormalArraySize = vertexArraySize;
+                mNormalSize = 3;
+                mNormalType = GL_FLOAT;
+            }
+            //if (hasTextures)mTextureUV = (GLfloat*)malloc(sizeof(GLfloat) * elementCount * 3);
+            for (int i = 0, j = 0; i < elementCount; i++, j+=9){
+                mPositions[j] = vertices[elements[i].xVec.x - 1].x;
+                mPositions[j+1] = vertices[elements[i].xVec.x - 1].y;
+                mPositions[j+2] = vertices[elements[i].xVec.x - 1].z;
+                mPositions[j+3] = vertices[elements[i].yVec.x - 1].x;
+                mPositions[j+4] = vertices[elements[i].yVec.x - 1].y;
+                mPositions[j+5] = vertices[elements[i].yVec.x - 1].z;
+                mPositions[j+6] = vertices[elements[i].zVec.x - 1].x;
+                mPositions[j+7] = vertices[elements[i].zVec.x - 1].y;
+                mPositions[j+8] = vertices[elements[i].zVec.x - 1].z;
+                
+                if (mNormals){
+                    int normal1, normal2, normal3;
+                    if (!hasTextures){
+                        normal1 = elements[i].xVec.y - 1;
+                        normal2 = elements[i].yVec.y - 1;
+                        normal3 = elements[i].zVec.y - 1;
+                    } else {
+                        normal1 = elements[i].xVec.z - 1;
+                        normal2 = elements[i].yVec.z - 1;
+                        normal3 = elements[i].zVec.z - 1;
+                    }
+                    
+                    mNormals[j] = normals[normal1].x;
+                    mNormals[j+1] = normals[normal1].y;
+                    mNormals[j+2] = normals[normal1].z;
+                    mNormals[j+3] = normals[normal2].x;
+                    mNormals[j+4] = normals[normal2].y;
+                    mNormals[j+5] = normals[normal2].z;
+                    mNormals[j+6] = normals[normal3].x;
+                    mNormals[j+7] = normals[normal3].y;
+                    mNormals[j+8] = normals[normal3].z;
+                }
+            }
+        }
         
         printf("vertices: %i\nnormals:%i\nelements:%i\n", vertexCount, normalCount, elementCount);
         
         for (int i = 0; i < vertexCount * 3; i+=3){
             printf("%f %f %f\n", mPositions[i], mPositions[i + 1], mPositions[i + 2]);
             printf("%f %f %f\n", mNormals[i], mNormals[i + 1], mNormals[i + 2]);
-        }
-        for (int i = 0; i < normalCount * 3; i++){
-            printf("%f\n", faceNormals[i]);
-        }
-        
-        for (int i = 0; i < elementCount; i++){
-            printf("%i\n", mElements[i]);
         }
         
     } else {
@@ -241,6 +250,13 @@ ObjModelLoader::ObjModelLoader(const char* objFileName) {
     CFRelease(filePath);
     CFRelease(url);
     CFRelease(name);
+}
+
+ObjModelLoader::~ObjModelLoader() {
+    free(mPositions);
+    free(mNormals);
+    free(mTextureUV);
+    free(mElements);
 }
 
 

@@ -151,6 +151,7 @@
 		43D4D733193F73D0004DCABB /* BaseDrawableObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43D4D731193F73D0004DCABB /* BaseDrawableObject.cpp */; };
 		43E569C81941E8DF00FBA3A5 /* SimpleParticleFeedbackShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43E569C61941E8DF00FBA3A5 /* SimpleParticleFeedbackShader.cpp */; };
 		43E569CA1941E9E000FBA3A5 /* simpleParticle.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 43E569C91941E9E000FBA3A5 /* simpleParticle.vsh */; };
+		43E7B0DD194EFE8200B24C52 /* CrossModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43E7B0DC194EFE8200B24C52 /* CrossModel.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -494,6 +495,8 @@
 		43E569C61941E8DF00FBA3A5 /* SimpleParticleFeedbackShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SimpleParticleFeedbackShader.cpp; sourceTree = "<group>"; };
 		43E569C71941E8DF00FBA3A5 /* SimpleParticleFeedbackShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleParticleFeedbackShader.h; sourceTree = "<group>"; };
 		43E569C91941E9E000FBA3A5 /* simpleParticle.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = simpleParticle.vsh; sourceTree = "<group>"; };
+		43E7B0DB194EFE7A00B24C52 /* CrossModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CrossModel.h; sourceTree = "<group>"; };
+		43E7B0DC194EFE8200B24C52 /* CrossModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CrossModel.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -673,6 +676,8 @@
 				43D4D731193F73D0004DCABB /* BaseDrawableObject.cpp */,
 				43D4D72F193F6E4A004DCABB /* SimpleParticleModel.h */,
 				43D4D72E193F6E4A004DCABB /* SimpleParticleModel.cpp */,
+				43E7B0DB194EFE7A00B24C52 /* CrossModel.h */,
+				43E7B0DC194EFE8200B24C52 /* CrossModel.cpp */,
 			);
 			name = "Model Classes";
 			sourceTree = "<group>";
@@ -1232,6 +1237,7 @@
 				43D4D6C6193F4E14004DCABB /* glm.cpp in Sources */,
 				43A428D81940C8F300605DAE /* LeapObjectiveC.mm in Sources */,
 				43D4D590193F4874004DCABB /* GLEssentialsFullscreenWindow.m in Sources */,
+				43E7B0DD194EFE8200B24C52 /* CrossModel.cpp in Sources */,
 				43D4D58F193F4874004DCABB /* GLEssentialsGLView.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
