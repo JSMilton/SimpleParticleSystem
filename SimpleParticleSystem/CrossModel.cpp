@@ -10,7 +10,7 @@
 #include "ObjModelLoader.h"
 
 CrossModel::CrossModel() : BaseModel() {
-    ObjModelLoader crossObj = ObjModelLoader("cross", false);
+    ObjModelLoader crossObj = ObjModelLoader("thinLine", false);
     mPositions = crossObj.mPositions;
     mPositionArraySize = crossObj.mPositionArraySize;
     mPositionSize = crossObj.mPositionSize;
@@ -27,12 +27,12 @@ CrossModel::CrossModel() : BaseModel() {
 }
 
 void CrossModel::update(GLint modelMatrixHandle) {
-//    mVelocityVector.x *= 0.99;
-//    mVelocityVector.y *= 0.99;
-//    mVelocityVector.z *= 0.99;
-//    
-//    rotateModelByVector3AndAngle(1, 0, 0, mVelocityVector.x);
-//    rotateModelByVector3AndAngle(0, 1, 0, mVelocityVector.y);
+    mVelocityVector.x *= 0.99;
+    mVelocityVector.y *= 0.99;
+    mVelocityVector.z *= 0.99;
+    
+    rotateModelByVector3AndAngle(1, 0, 0, mVelocityVector.x);
+    rotateModelByVector3AndAngle(0, 1, 0, mVelocityVector.y);
     
     glm::mat4 modelMatrix = BaseModel::createModelMatrix();
     

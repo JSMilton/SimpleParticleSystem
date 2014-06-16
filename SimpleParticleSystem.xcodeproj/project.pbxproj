@@ -154,6 +154,7 @@
 		43E7B0DD194EFE8200B24C52 /* CrossModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43E7B0DC194EFE8200B24C52 /* CrossModel.cpp */; };
 		43E7B0E0194F040F00B24C52 /* SceneColorShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43E7B0DF194F040F00B24C52 /* SceneColorShader.cpp */; };
 		43E7B0E2194F16F200B24C52 /* cube.obj in Resources */ = {isa = PBXBuildFile; fileRef = 43E7B0E1194F16F200B24C52 /* cube.obj */; };
+		43E7B0E4194F2C3500B24C52 /* thinLine.obj in Resources */ = {isa = PBXBuildFile; fileRef = 43E7B0E3194F2C3500B24C52 /* thinLine.obj */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -502,6 +503,7 @@
 		43E7B0DE194F040F00B24C52 /* SceneColorShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneColorShader.h; sourceTree = "<group>"; };
 		43E7B0DF194F040F00B24C52 /* SceneColorShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SceneColorShader.cpp; sourceTree = "<group>"; };
 		43E7B0E1194F16F200B24C52 /* cube.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cube.obj; sourceTree = "<group>"; };
+		43E7B0E3194F2C3500B24C52 /* thinLine.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = thinLine.obj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -589,6 +591,7 @@
 				43289F541948A623003CF0BC /* cross.txt */,
 				43289F5219489E96003CF0BC /* cross.obj */,
 				43E7B0E1194F16F200B24C52 /* cube.obj */,
+				43E7B0E3194F2C3500B24C52 /* thinLine.obj */,
 				43CD1FB31940A7CB007E996B /* Droplet.png */,
 				43D4D726193F4E37004DCABB /* glUtil.h */,
 				43CD1FAA19409CFE007E996B /* imageUtil.m */,
@@ -1145,6 +1148,7 @@
 				43D4D6C3193F4E14004DCABB /* func_packing.inl in Resources */,
 				43D4D6D3193F4E14004DCABB /* type_mat2x3.inl in Resources */,
 				43D4D6EC193F4E14004DCABB /* ulp.inl in Resources */,
+				43E7B0E4194F2C3500B24C52 /* thinLine.obj in Resources */,
 				43D4D725193F4E14004DCABB /* wrap.inl in Resources */,
 				43D4D720193F4E14004DCABB /* transform2.inl in Resources */,
 				43D4D70F193F4E14004DCABB /* optimum_pow.inl in Resources */,

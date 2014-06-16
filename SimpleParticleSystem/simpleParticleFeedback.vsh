@@ -5,7 +5,8 @@ layout (location = 2) in float inStartTime;
 layout (location = 3) in float inOpacity;
 
 uniform vec3 uEmitterPosition; // emitter position in world coordinates
-uniform float uElapsedTime; // system time in seconds
+uniform float uElapsedTime; // system time in second
+uniform mat4 uModelMatrix;
 
 // the fragment shader can use this for it's output colour's alpha component
 layout (location = 0) out vec3 outPosition;
@@ -20,7 +21,7 @@ void main() {
     t = mod (t, 3.0);
     vec3 p;
     if (inOpacity < 0.01){
-        p = uEmitterPosition;
+        p = vec3(uModelMatrix * vec4(uEmitterPosition, 1));
         outOpacity = 1.0;
     } else {
         p = inPosition;

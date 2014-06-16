@@ -14,4 +14,5 @@ public:
     
     GLint mEmitterPositionHandle;
     GLint mElapsedTimeHandle;
+    GLint mModelMatrixHandle;
 };

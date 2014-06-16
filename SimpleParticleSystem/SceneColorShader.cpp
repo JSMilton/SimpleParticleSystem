@@ -13,4 +13,5 @@ SceneColorShader::SceneColorShader() : BaseShader("sceneColor", "sceneColor") {
     mModelMatrixHandle = getUniformLocation("uModelMatrix");
     mViewMatrixHandle = getUniformLocation("uViewMatrix");
     mProjectionMatrixHandle = getUniformLocation("uProjectionMatrix");
+    mLightPositionWorldHandle = getUniformLocation("uLightPositionWorld");
 }

@@ -29,7 +29,7 @@ void GLRenderer::initOpenGL() {
     mParticleModelC = new SimpleParticleModel;
     mParticleModelD = new SimpleParticleModel;
     
-    lightPosition = glm::vec3(0.0,10.0,10.0);
+    lightPosition = glm::vec3(0.0,0.0,10.0);
     
     ImageLoader *myImage = new ImageLoader("Droplet");
     glGenTextures(1, &mParticleTexture);
@@ -45,14 +45,14 @@ void GLRenderer::initOpenGL() {
     myImage->~ImageLoader();
     delete myImage;
     
-    emitterPosition = glm::vec3(0.5,0,0);
-    emitterPosition2 = glm::vec3(-0.5,0,0);
+    emitterPosition = glm::vec3(1.0,0,0);
+    emitterPosition2 = glm::vec3(-1.0,0,0);
     
     mBuffer = 0;
     
     mCrossModel = new CrossModel;
-    mCrossModel->scaleModelByVector3(0.5, 0.5, 0.5);
-    mCrossModel->translateModelByVector3(0,0,-2);
+    //mCrossModel->scaleModelByVector3(0.5, 0.5, 0.5);
+    //mCrossModel->translateModelByVector3(0,0,-2);
     mSceneColorShader = new SceneColorShader;
     
     glEnable (GL_PROGRAM_POINT_SIZE);
@@ -72,6 +72,7 @@ void GLRenderer::render(float dt) {
     mSimpleParticleFeedbackShader->enable();
     glUniform3fv(mSimpleParticleFeedbackShader->mEmitterPositionHandle, 1, glm::value_ptr(emitterPosition));
     glUniform1f(mSimpleParticleFeedbackShader->mElapsedTimeHandle, timer += (GLfloat)dt);
+    glUniformMatrix4fv(mSimpleParticleFeedbackShader->mModelMatrixHandle, 1, GL_FALSE, glm::value_ptr(mCrossModel->getModelMatrix()));
     
     if (mBuffer == 0){
         glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, mParticleModelA->mVBO);
@@ -135,7 +136,7 @@ void GLRenderer::render(float dt) {
     mSceneColorShader->enable();
     glUniformMatrix4fv(mSceneColorShader->mProjectionMatrixHandle, 1, GL_FALSE, glm::value_ptr(mProjectionMatrix));
     glUniformMatrix4fv(mSceneColorShader->mViewMatrixHandle, 1, GL_FALSE, glm::value_ptr(mViewMatrix));
-    mCrossModel->rotateModelByVector3AndAngle(1, 1, 0, angle);
+    glUniform3fv(mSceneColorShader->mLightPositionWorldHandle, 1, glm::value_ptr(lightPosition));
     mCrossModel->update(mSceneColorShader->mModelMatrixHandle);
     mCrossModel->drawArrays();
     mSceneColorShader->disable();
@@ -143,17 +144,15 @@ void GLRenderer::render(float dt) {
     
     mPreviousViewMatrix = mViewMatrix;
     
-    emitterPosition = glm::rotateY(emitterPosition, mParticleRotationVelocity);
-    emitterPosition2.x = emitterPosition.x * -1;
-    emitterPosition2.y = emitterPosition.y * -1;
-    emitterPosition2.z = emitterPosition.z * -1;
+    //emitterPosition = glm::rotateY(emitterPosition, mParticleRotationVelocity);
+//    emitterPosition2.x = emitterPosition.x * -1;
+//    emitterPosition2.y = emitterPosition.y * -1;
+//    emitterPosition2.z = emitterPosition.z * -1;
     
     mBuffer++;
     if (mBuffer > 1)mBuffer = 0;
     
     mParticleRotationVelocity *= 0.99;
-    
-    angle=0.6;
 }
 
 void GLRenderer::reshape(int width, int height) {
@@ -205,15 +204,16 @@ void GLRenderer::freeGLBindings(void) const
 }
 
 void GLRenderer::moveLightSourceByNormalisedVector(float x, float y, float z) {
-    float range = 2;
-    lightPosition.x = (range * x) - (range / 2);
-    lightPosition.y = (range * y) - (range / 2);
-    lightPosition.z = (range * z) - (range / 2);
+//    float range = 2;
+//    lightPosition.x = (range * x) - (range / 2);
+//    lightPosition.y = (range * y) - (range / 2);
+//    lightPosition.z = (range * z) - (range / 2);
 }
 
 void GLRenderer::changeParticleVelocity(float velocity) {
     //timer += velocity / velMod;
-    mParticleRotationVelocity += velocity / 3000;
+    //mParticleRotationVelocity += velocity / 3000;
+    mCrossModel->mVelocityVector.y += velocity/3000;
 //    emitterPosition = glm::rotateY(emitterPosition, velocity/10);
 //    emitterPosition2.x = emitterPosition.x * -1;
 //    emitterPosition2.y = emitterPosition.y * -1;

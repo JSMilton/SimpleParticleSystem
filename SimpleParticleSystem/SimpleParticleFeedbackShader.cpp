@@ -17,4 +17,5 @@ SimpleParticleFeedbackShader::SimpleParticleFeedbackShader() : BaseShader("simpl
     
     mEmitterPositionHandle = getUniformLocation("uEmitterPosition");
     mElapsedTimeHandle = getUniformLocation("uElapsedTime");
+    mModelMatrixHandle = getUniformLocation("uModelMatrix");
 }

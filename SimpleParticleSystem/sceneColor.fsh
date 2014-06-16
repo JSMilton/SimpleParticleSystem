@@ -4,6 +4,8 @@ layout (location = 0) out vec4 outColor;
 in vec3 vPosition_eye, vNormal_eye;
 in mat4 vViewMatrix;
 
+uniform vec3 uLightPositionWorld;
+
 // fixed point light properties
 vec3 light_position_world = vec3 (0.0, 0.0, 10.5);
 vec3 Ls = vec3 (1.0, 1.0, 1.0); // white specular colour
@@ -21,7 +23,7 @@ float light_power = 150;
 void main (void)
 {
     vec3 EyeDirection_eye = vec3(0,0,0) - vPosition_eye;
-    vec3 light_position_eye = vec3(vViewMatrix * vec4(light_position_world, 1.0)).xyz;
+    vec3 light_position_eye = vec3(vViewMatrix * vec4(uLightPositionWorld, 1.0)).xyz;
     vec3 light_direction_eye = light_position_eye + EyeDirection_eye;
     vec3 light_distance_eye = light_position_eye.xyz - vPosition_eye.xyz;
     float LD = dot(light_distance_eye, light_distance_eye);

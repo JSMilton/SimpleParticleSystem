@@ -67,6 +67,4 @@ private:
     float mParticleRotationVelocity;
     
     int mBuffer;
-    
-    float angle;
 };

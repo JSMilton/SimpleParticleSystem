@@ -15,4 +15,5 @@ public:
     GLint mModelMatrixHandle;
     GLint mViewMatrixHandle;
     GLint mProjectionMatrixHandle;
+    GLint mLightPositionWorldHandle;
 };
