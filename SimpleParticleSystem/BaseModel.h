@@ -37,7 +37,7 @@ public:
 protected:
     glm::mat4 createModelMatrix();
 	
-	GLubyte *mPositions;
+	GLfloat *mPositions;
 	GLenum mPositionType;
 	GLuint mPositionSize;
 	GLsizei mPositionArraySize;
@@ -47,12 +47,12 @@ protected:
 	GLuint mColorSize;
 	GLsizei mColorArraySize;
     
-    GLubyte *mNormals;
+    GLfloat *mNormals;
 	GLenum mNormalType;
 	GLuint mNormalSize;  
 	GLsizei mNormalArraySize;
     
-    GLubyte *mTextureUV;
+    GLfloat *mTextureUV;
 	GLenum mTextureType;
 	GLuint mTextureSize;
 	GLsizei mTexureUVArraySize;

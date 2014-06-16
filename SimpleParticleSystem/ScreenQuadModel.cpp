@@ -32,13 +32,13 @@ ScreenQuadModel::ScreenQuadModel() : BaseModel() {
     mPositionSize = 3;
     mPositionArraySize = sizeof(positionArray);
     mPositionType = GL_FLOAT;
-    mPositions = (GLubyte *)malloc(mPositionArraySize);
+    mPositions = (GLfloat *)malloc(mPositionArraySize);
     memcpy(mPositions, positionArray, mPositionArraySize);
     
     mTextureSize = 2;
     mTexureUVArraySize = sizeof(textureUVArray);
     mTextureType = GL_FLOAT;
-    mTextureUV = (GLubyte *)malloc(mTexureUVArraySize);
+    mTextureUV = (GLfloat *)malloc(mTexureUVArraySize);
     memcpy(mTextureUV, textureUVArray, mTexureUVArraySize);
     
     mPrimitiveType = GL_TRIANGLES;

@@ -152,6 +152,8 @@
 		43E569C81941E8DF00FBA3A5 /* SimpleParticleFeedbackShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43E569C61941E8DF00FBA3A5 /* SimpleParticleFeedbackShader.cpp */; };
 		43E569CA1941E9E000FBA3A5 /* simpleParticle.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 43E569C91941E9E000FBA3A5 /* simpleParticle.vsh */; };
 		43E7B0DD194EFE8200B24C52 /* CrossModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43E7B0DC194EFE8200B24C52 /* CrossModel.cpp */; };
+		43E7B0E0194F040F00B24C52 /* SceneColorShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43E7B0DF194F040F00B24C52 /* SceneColorShader.cpp */; };
+		43E7B0E2194F16F200B24C52 /* cube.obj in Resources */ = {isa = PBXBuildFile; fileRef = 43E7B0E1194F16F200B24C52 /* cube.obj */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -497,6 +499,9 @@
 		43E569C91941E9E000FBA3A5 /* simpleParticle.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = simpleParticle.vsh; sourceTree = "<group>"; };
 		43E7B0DB194EFE7A00B24C52 /* CrossModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CrossModel.h; sourceTree = "<group>"; };
 		43E7B0DC194EFE8200B24C52 /* CrossModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CrossModel.cpp; sourceTree = "<group>"; };
+		43E7B0DE194F040F00B24C52 /* SceneColorShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneColorShader.h; sourceTree = "<group>"; };
+		43E7B0DF194F040F00B24C52 /* SceneColorShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SceneColorShader.cpp; sourceTree = "<group>"; };
+		43E7B0E1194F16F200B24C52 /* cube.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cube.obj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -583,6 +588,7 @@
 			children = (
 				43289F541948A623003CF0BC /* cross.txt */,
 				43289F5219489E96003CF0BC /* cross.obj */,
+				43E7B0E1194F16F200B24C52 /* cube.obj */,
 				43CD1FB31940A7CB007E996B /* Droplet.png */,
 				43D4D726193F4E37004DCABB /* glUtil.h */,
 				43CD1FAA19409CFE007E996B /* imageUtil.m */,
@@ -655,6 +661,8 @@
 		43D4D597193F48A0004DCABB /* Shader Classes */ = {
 			isa = PBXGroup;
 			children = (
+				43E7B0DE194F040F00B24C52 /* SceneColorShader.h */,
+				43E7B0DF194F040F00B24C52 /* SceneColorShader.cpp */,
 				43D4D599193F48DB004DCABB /* BaseShader.h */,
 				43D4D59A193F48DB004DCABB /* BaseShader.cpp */,
 				43D4D728193F6A29004DCABB /* SimpleParticleShader.h */,
@@ -1124,6 +1132,7 @@
 				43D4D6E9193F4E14004DCABB /* reciprocal.inl in Resources */,
 				43D4D6CC193F4E14004DCABB /* intrinsic_trigonometric.inl in Resources */,
 				43D4D721193F4E14004DCABB /* unsigned_int.inl in Resources */,
+				43E7B0E2194F16F200B24C52 /* cube.obj in Resources */,
 				43D4D6DE193F4E14004DCABB /* type_vec3.inl in Resources */,
 				43D4D709193F4E14004DCABB /* mixed_product.inl in Resources */,
 				43D4D71C193F4E14004DCABB /* spline.inl in Resources */,
@@ -1232,6 +1241,7 @@
 				43D4CF68193F45C9004DCABB /* AppDelegate.m in Sources */,
 				43D4D591193F4874004DCABB /* GLEssentialsWindowController.m in Sources */,
 				43D4D733193F73D0004DCABB /* BaseDrawableObject.cpp in Sources */,
+				43E7B0E0194F040F00B24C52 /* SceneColorShader.cpp in Sources */,
 				43D4CF61193F45C9004DCABB /* main.m in Sources */,
 				43CD1FB019409D20007E996B /* ImageLoader.cpp in Sources */,
 				43D4D6C6193F4E14004DCABB /* glm.cpp in Sources */,

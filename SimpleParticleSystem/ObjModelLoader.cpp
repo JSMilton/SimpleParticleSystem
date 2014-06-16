@@ -233,14 +233,21 @@ ObjModelLoader::ObjModelLoader(const char* objFileName, bool indexed) {
                     mNormals[j+8] = normals[normal3].z;
                 }
             }
+            
+            mNumVertices = elementCount * 3;
         }
         
         printf("vertices: %i\nnormals:%i\nelements:%i\n", vertexCount, normalCount, elementCount);
         
-        for (int i = 0; i < vertexCount * 3; i+=3){
+        for (int i = 0; i < elementCount * 9; i+=3){
             printf("%f %f %f\n", mPositions[i], mPositions[i + 1], mPositions[i + 2]);
             printf("%f %f %f\n", mNormals[i], mNormals[i + 1], mNormals[i + 2]);
         }
+        
+        if (!hasTextures)mTextureUV = NULL;
+        if (!hasNormals)mNormals = NULL;
+        if (!hasPositions)mPositions = NULL;
+        if (!indexed)mElements = NULL;
         
     } else {
         printf("NO FILE!!!!\n");
@@ -253,10 +260,10 @@ ObjModelLoader::ObjModelLoader(const char* objFileName, bool indexed) {
 }
 
 ObjModelLoader::~ObjModelLoader() {
-    free(mPositions);
-    free(mNormals);
-    free(mTextureUV);
-    free(mElements);
+    if (mPositions)free(mPositions);
+    if (mNormals)free(mNormals);
+    if (mTextureUV)free(mTextureUV);
+    if (mElements)free(mElements);
 }
 
 

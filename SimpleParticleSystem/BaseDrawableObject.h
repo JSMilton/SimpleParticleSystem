@@ -22,7 +22,7 @@ protected:
     GLuint mVAO;
     GLuint mNumVertices;
     GLenum mPrimitiveType;
-    GLubyte *mElements;
+    GLuint *mElements;
 	GLenum mElementType;
 	GLuint mNumElements;
 	GLsizei mElementArraySize;

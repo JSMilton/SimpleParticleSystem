@@ -11,7 +11,8 @@
 #include "SimpleParticleShader.h"
 #include "SimpleParticleFeedbackShader.h"
 #include "ImageLoader.h"
-#include "ObjModelLoader.h"
+#include "CrossModel.h"
+#include "SceneColorShader.h"
 
 void GLRenderer::initOpenGL() {
     glClearColor(0.f, 0.f, 0.f, 1.0f);
@@ -49,11 +50,14 @@ void GLRenderer::initOpenGL() {
     
     mBuffer = 0;
     
+    mCrossModel = new CrossModel;
+    mCrossModel->scaleModelByVector3(0.5, 0.5, 0.5);
+    mCrossModel->translateModelByVector3(0,0,-2);
+    mSceneColorShader = new SceneColorShader;
+    
     glEnable (GL_PROGRAM_POINT_SIZE);
     glEnable (GL_BLEND);
     glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    
-    ObjModelLoader *myObj = new ObjModelLoader("cross", false);
     
     render(0.0);
 }
@@ -127,6 +131,16 @@ void GLRenderer::render(float dt) {
     }
     mSimpleParticleShader->disable();
     
+    glEnable(GL_DEPTH_TEST);
+    mSceneColorShader->enable();
+    glUniformMatrix4fv(mSceneColorShader->mProjectionMatrixHandle, 1, GL_FALSE, glm::value_ptr(mProjectionMatrix));
+    glUniformMatrix4fv(mSceneColorShader->mViewMatrixHandle, 1, GL_FALSE, glm::value_ptr(mViewMatrix));
+    mCrossModel->rotateModelByVector3AndAngle(1, 1, 0, angle);
+    mCrossModel->update(mSceneColorShader->mModelMatrixHandle);
+    mCrossModel->drawArrays();
+    mSceneColorShader->disable();
+    glDisable(GL_DEPTH_TEST);
+    
     mPreviousViewMatrix = mViewMatrix;
     
     emitterPosition = glm::rotateY(emitterPosition, mParticleRotationVelocity);
@@ -138,6 +152,8 @@ void GLRenderer::render(float dt) {
     if (mBuffer > 1)mBuffer = 0;
     
     mParticleRotationVelocity *= 0.99;
+    
+    angle=0.6;
 }
 
 void GLRenderer::reshape(int width, int height) {

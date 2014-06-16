@@ -8,3 +8,12 @@
 
 #include "BaseModel.h"
 
+class CrossModel : public BaseModel {
+public:
+    CrossModel();
+    
+    void update(GLint modelMatrixHandle);
+    
+    glm::mat4 mPreviousModelMatrix;
+    glm::vec3 mVelocityVector;
+};

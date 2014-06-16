@@ -20,6 +20,8 @@ public:
     ObjModelLoader(const char* objFileName, bool indexed);
     ~ObjModelLoader();
     
+    GLuint mNumVertices;
+    
     GLfloat *mPositions;
     GLenum mPositionType;
     GLuint mPositionSize;

@@ -16,6 +16,8 @@ class SimpleParticleModel;
 class SimpleParticleShader;
 class SimpleParticleFeedbackShader;
 class SimpleParticleModel;
+class SceneColorShader;
+class CrossModel;
 
 class GLRenderer {
 public:
@@ -52,6 +54,9 @@ private:
     SimpleParticleModel *mParticleModelC;
     SimpleParticleModel *mParticleModelD;
     
+    SceneColorShader *mSceneColorShader;
+    CrossModel *mCrossModel;
+    
     GLuint mParticleTexture;
     
     float timer;
@@ -62,4 +67,6 @@ private:
     float mParticleRotationVelocity;
     
     int mBuffer;
+    
+    float angle;
 };
